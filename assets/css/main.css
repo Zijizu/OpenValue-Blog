@@ -4052,7 +4052,7 @@ input, select, textarea {
 			color: #717981;
 		}
 
-		/*edit*/#flag{
+		/*edit*/.flag{
 			display: inline-block;
 			height: 0.7em;
 			margin-right: 0.5em;
@@ -4271,7 +4271,7 @@ input, select, textarea {
 			-webkit-flex-shrink: 1;
 			-ms-flex-shrink: 1;
 			flex-shrink: 1;
-			padding: 4rem 4rem 2rem 4rem ;
+			padding: 4rem 4rem 1rem 4rem ;
 			border-left: solid 2px #e2e2e2;
 		}
 
@@ -4393,6 +4393,9 @@ input, select, textarea {
 		#footer h3,
 		#footer p {
 			font-size: 0.8rem;
+		}
+		/*edit*/#footer p.bold{
+			font-weight: bold;
 		}
 
 		@media screen and (max-width: 980px) {
