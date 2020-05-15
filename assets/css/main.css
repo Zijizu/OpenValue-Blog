@@ -4052,6 +4052,12 @@ input, select, textarea {
 			color: #717981;
 		}
 
+		/*edit*/#flag{
+			display: inline-block;
+			height: 0.7em;
+			margin-right: 0.5em;
+		}
+
 		#footer blockquote {
 			border-left-color: #e2e2e2;
 		}
@@ -4286,18 +4292,44 @@ input, select, textarea {
 			}
 
 				#footer > section.split > section {
-					padding: 3rem 4rem 1rem 4rem ;
+					padding: 4rem 4rem 1rem 4rem ;
 					border-top: solid 2px #e2e2e2;
 				}
 
 					#footer > section.split > section:first-child {
-						padding: 5rem 4rem 1rem 4rem ;
+						padding: 4rem 4rem 1rem 4rem ;
 						border-top: 0;
 					}
 
 					#footer > section.split > section:last-child {
-						padding: 3rem 4rem 3rem 4rem ;
+						padding: 4rem 4rem 1rem 4rem ;
 					}
+
+			/*edit*/#footer > section.split-inv {
+				display: -moz-flex;
+				display: -webkit-flex;
+				display: -ms-flex;
+				display: flex;
+				-moz-flex-direction: column;
+				-webkit-flex-direction: column;
+				-ms-flex-direction: column;
+				flex-direction: column;
+				padding: 0;
+			}	
+				
+				/*edit*/#footer > section.split-inv > section {
+				padding: 4rem 4rem 1rem 4rem ;
+				border-top: solid 2px #F5F5F5;
+				}
+
+					/*edit*/#footer > section.split-inv > section:first-child {
+						padding: 4rem 4rem 1rem 4rem ;
+						border-top: 0;
+					}
+
+					/*edit*/#footer > section.split-inv > section:last-child {
+						padding: 4rem 4rem 1rem 4rem ;
+					}	
 
 				#footer > section.split.contact > section {
 					display: -moz-flex;
