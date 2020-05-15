@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<noscript>
 		<link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	<link rel="shortcut icon" type="image/png" href="images/favicon.png" />
 </head>
 
 <body class="is-preload">
@@ -18,10 +19,14 @@
 
 		<!-- Intro -->
 		<div id="intro">
-			<h1>OpenValue | Blog</h1>
-			<p>Wir stehen für Java- und Full-Stack-Lösungen in der Beratung, Entwicklung und Implementierung.</p>
+			<div class="inner">
+				<div id="intro-logo">
+					<img src="images/openvalue-white.png">
+				</div>
+				<p id="tagline">Better software, faster.</p>
+			</div>
 			<ul class="actions">
-				<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
+				<li><a href="#nav" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
 			</ul>
 		</div>
 
@@ -33,7 +38,7 @@
 		<!-- Nav -->
 		<nav id="nav">
 			<ul class="links">
-				<li class="active"><a href="index.html">OpenValue | Blog</a></li>
+				<li class="active"><a>OpenValue | Blog</a></li>
 				<!-- <li><a href="https://openvalue.de/">OpenValue Website</a></li> -->
 			</ul>
 			<ul class="icons">
@@ -53,15 +58,15 @@
 			<article class="post featured">
 				<header class="major">
 					<span class="date">April 25, 2017</span>
-					<h2><a href="#">Stet clita<br />
+					<h2><a href="generic.html">Stet clita<br />
 							kasd gubergren</a></h2>
 					<p>Aenean ornare velit lacus varius enim ullamcorper proin aliquam<br />
 						facilisis ante sed etiam magna interdum congue. Lorem ipsum dolor<br />
 						amet nullam sed etiam veroeros.</p>
 				</header>
-				<a href="#" class="image main"><img src="images/pic01.jpg" alt="" /></a>
+				<a href="generic.html" class="image main"><img src="images/pic01.jpg" alt="" /></a>
 				<ul class="actions special">
-					<li><a href="#" class="button large">Read More</a></li>
+					<li><a href="generic.html" class="button large">Read More</a></li>
 				</ul>
 			</article>
 
@@ -167,7 +172,7 @@
 		<!-- Footer -->
 		<footer id="footer">
 			<section>
-				<form method="post" action="#">
+				<!-- <form method="post" action="#">
 					<div class="fields">
 						<div class="field">
 							<label for="name">Name</label>
@@ -185,23 +190,34 @@
 					<ul class="actions">
 						<li><input type="submit" value="Send Message" /></li>
 					</ul>
-				</form>
-			</section>
-			<section class="split contact">
+				</form> -->
 				<section class="alt">
+					<h3>Utrecht</h3>
+					<h3>Address</h3>
+					<p> Jakob-Klar-Straße 4<br />
+						80796 München</p>
+					<h3>Rotterdam</h3>
 					<h3>Address</h3>
 					<p> Jakob-Klar-Straße 4<br />
 						80796 München</p>
 				</section>
-				<section>
-					<h3>Phone</h3>
-					<p><a href="tel:+498945214739">+49 89 4521 4739</a></p>
-				</section>
-				<section>
+			</section>
+			<section class="split contact">
+				<section class="alt">
+					<div class="split contact">
+						<h3>München</h3>
+						<h3>Address</h3>
+					</div>
+					<p> Jakob-Klar-Straße 4<br />
+						80796 München</p>
 					<h3>Email</h3>
 					<p><a href="mailto:info@openvalue.de">info@openvalue.de</a></p>
 				</section>
-				<section>
+				<section class="alt">
+					<h3>Phone</h3>
+					<p><a href="tel:+498945214739">+49 89 4521 4739</a></p>
+				</section>
+				<!--<section>
 					<h3>Social</h3>
 					<ul class="icons alt">
 						<li><a href="https://twitter.com/OpenValue" class="icon brands alt fa-twitter"><span
@@ -210,7 +226,7 @@
 									class="label">YouTube</span></a>
 						</li>
 					</ul>
-				</section>
+				</section>-->
 			</section>
 		</footer>
 
