@@ -1,0 +1,313 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>OpenValue | Blog</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <noscript>
+        <link rel="stylesheet" href="assets/css/noscript.css">
+    </noscript>
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png">
+</head>
+
+<body class="is-preload">
+    <!-- Wrapper -->
+    <div id="wrapper">
+        <!-- Header -->
+        <header id="header">
+            <div class="inner">
+                <div id="header-logo">
+                    <img src="images/openvalue-white.png">
+                </div>
+                <!-- <p id="tagline">Better software, faster.</p> -->
+            </div>
+        </header>
+        <!-- Nav -->
+        <nav id="nav">
+            <ul class="links">
+                <li class="active">
+                    <a href="index.html">Home</a>
+                </li>
+                <!-- <li class="active"><a href="generic.html">Article</a></li> -->
+            </ul>
+            <ul class="icons">
+                <li>
+                    <a href="https://twitter.com/OpenValue" target="_blank" class="icon brands fa-twitter">
+                        <span class="label">Twitter</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://talks.openvalue.tech/" target="_blank" class="icon brands fa-youtube">
+                        <span class="label">YouTube</span>
+                    </a>
+                </li>
+                <!-- <li><a href="mailto:info@openvalue.de" class="icon solid fa-envelope"><span
+							class="label">Email</span></a></li> -->
+            </ul>
+        </nav>
+        <!-- Main -->
+        <div id="main">
+            <!-- Post -->
+            <section class="post">
+                <header class="major">
+                    <span class="date">April 25, 2017</span>
+                    <h1>JSR-381: A Standard Java API
+                        <br> for Visual Recognition
+                        <br> using Machine Learning
+                    </h1>
+                    <p>
+                        At this point, most of us know Machine Learning (ML) as recognizing patterns in your data,
+                        anticipating the likely future behavior of similar data and taking steps to maximize benefits
+                        based on those predictions. It represents a massive change in how we solve problems and has
+                        long-term effects to the very foundations of computing and to the world in general.
+                    </p>
+                </header>
+                <div class="image main">
+                    <img src="images/pic01.jpg" alt="">
+                </div>
+                <p>
+                    Most ML toolkits require you to learn Python. Python is one of the leading programming languages in
+                    data science and ML. But there are 10 million Java developers on the planet that need to build
+                    world-class production ML applications that leverage our years of expertise in development and
+                    deployment.
+                </p>
+                <p>
+                    This article will cover a deep learning introduction and create a ML model that will be able to
+                    classify Star Wars aircrafts in just a few lines of code using Java Specification Request #JSR-381
+                    (“JSR-381”).
+                </p>
+                <h3>
+                    JSR-381
+                </h3>
+                <p>
+                    The goal of JSR-381 is to develop a standardized Java-friendly API which can be used to solve small
+                    and complex tasks by applying ML specifically to visual recognition use cases.
+                </p>
+                <p>
+                    Each ML engine (eg, TensorFlow, Deep Netts) has its own way of accepting input. It is a relatively
+                    large effort to standardize this type of input and therefore won’t be covered in this JSR. For now,
+                    the following features will be included into JSR-381 to simplify training and using the ML model:
+                </p>
+                <ul>
+                    <li>
+                        Binary classification to classify input which has the outcome true/false, yes/no, dark/bright,
+                        etc;
+                    </li>
+                    <li>
+                        Image classification to classify an image as input and the outcome of two or more trained
+                        labels, depending on the model;
+                    </li>
+                    <li>
+                        Object detection to detect and classify one or more fragments in the image as input with as
+                        outcome, one or more trained labels;
+                    </li>
+                    <li>
+                        Training tools to build the ML model for binary classification, image classification and object
+                        detection.
+                    </li>
+                </ul>
+                <p>
+                    At the same time as the development of the API, the first implementation of the API will be
+                    developed
+                    as well. This is the so called “Reference Implementation” (RI) which will meet all the requirements
+                    of the API as prescribed by the Java Community Process (JCP). The RI of JSR-381 uses Deep Netts, an
+                    open source deep learning engine written in pure Java. Amazon has its own implementation of JSR-381
+                    which will support TensorFlow, Apache MXNets and other upcoming engines using their abstraction API
+                    called Deep Java Library (DJL).
+                </p>
+                <h3>
+                    Supported algorithms
+                </h3>
+                <p>
+                    Not every developer is a mathematician. Neither am I. With JSR-381 you won’t have to understand the
+                    underlying math of these algorithms because it’s developed to allow you to use common Java design
+                    patterns instead of generated wrappers for native libraries. JSR-381 will only support neural
+                    networks by default and expose a high level API to use. Each implementation of JSR-381 will have to
+                    support neural networks but may also expose other algorithms and implementation specific algorithms
+                    to solve complex problems, which are better solved by algorithms other than neural networks. This
+                    way JSR-381 can be used by beginners and advanced ML Java developers alike.
+                </p>
+                <h3>
+                    Quick dive into understanding classification and deep learning
+                </h3>
+                <p>
+                    Classification is commonly used to determine whether the given input is answer A, B or even C. For
+                    each classification model, it needs a given set of labels and a prepared dataset. A part of
+                    preparing the dataset labelling the data. For example: a picture of a cat is labeled as cat and a
+                    picture of the dog is labeled as dog. This way the ML model will be able to learn and tell whether a
+                    newly given picture has to be classified as a cat or a dog. As previously explained, binary
+                    classification will only contain two labels which will be complete opposites of each other. The
+                    scenario of the dog and the cat is also binary classification. But it might also need to classify
+                    all bird pictures as birds. Afterwards the dataset and labels will be expanded with new data and the
+                    model will be retrained to classify cats, dogs and birds. This is called multiclass classification.
+                </p>
+                <p>
+                    MNIST is the most known multiclass classification ML model. MNIST is able to classify numeric
+                    characters from 0 to 9. Every ML engine has an example using MNIST because the dataset is free to
+                    download. The MNIST dataset has already been prepared to be trained with high accuracy.
+                </p>
+                <h3>
+                    Deep learning
+                </h3>
+                <p>
+                    Deep learning is a specific ML technique based on using multiple neural network layers. There are
+                    different algorithms but the one that’s often applied for image classification is called
+                    convolutional neural network. This type of algorithm has adaptive image filtering through network
+                    layers and then performs the classification on the trained model and results into labeled output
+                    like you would with any classifier.
+                </p>
+                <img src="images\articles\1\ConvNet.png">
+                <p></p>
+            </section>
+        </div>
+        <!-- Footer -->
+        <footer id="footer">
+            <section class="split">
+                <!-- <form method="post" action="#">
+					<div class="fields">
+						<div class="field">
+							<label for="name">Name</label>
+							<input type="text" name="name" id="name" />
+						</div>
+						<div class="field">
+							<label for="email">Email</label>
+							<input type="text" name="email" id="email" />
+						</div>
+						<div class="field">
+							<label for="message">Message</label>
+							<textarea name="message" id="message" rows="3"></textarea>
+						</div>
+					</div>
+					<ul class="actions">
+						<li><input type="submit" value="Send Message" /></li>
+					</ul>
+				</form> -->
+                <section class="alt">
+                    <div>
+                        <h2>
+                            <a href="https://openvalue.nl/">
+                                <img src="images/nl.png" class="flag">Utrecht
+                            </a>
+                        </h2>
+                        <p class="bold">
+                            Tractieweg 41, Studio N
+                            <br>
+                            3534 AP Utrecht
+                        </p>
+                        <p>
+                            <a href="tel:+31850606886" class="icon solid fa-phone"> +31-85-0606886</a>
+                        </p>
+                        <p>
+                            <a href="mailto:utrecht@openvalue.nl" class="icon regular fa-envelope">
+                                utrecht@openvalue.nl
+                            </a>
+                        </p>
+                    </div>
+                </section>
+                <section>
+                    <div>
+                        <h2>
+                            <a href="https://openvalue.nl/">
+                                <img src="images/nl.png" class="flag">Rotterdam
+                            </a>
+                        </h2>
+                        <p class="bold">
+                            Jacob van Heemskercklaan 119
+                            <br>
+                            3144 DK Maassluis
+                        </p>
+                        <p>
+                            <a href="tel:+31643896389" class="icon solid fa-phone"> +31-6-4389-6389</a>
+                        </p>
+                        <p>
+                            <a href="mailto:rotterdam@openvalue.nl" class="icon regular fa-envelope">
+                                rotterdam@openvalue.nl
+                            </a>
+                        </p>
+                    </div>
+                </section>
+            </section>
+            <section class="split">
+                <section class="alt">
+                    <div>
+                        <h2>
+                            <a href="https://openvalue.de/">
+                                <img src="images/de.png" class="flag">Munich
+                            </a>
+                        </h2>
+                        <p class="bold">
+                            Jakob-Klar-Straße 4
+                            <br> 80796 München
+                        </p>
+                        <p>
+                            <a href="tel:+498945214739" class="icon solid fa-phone"> +49 89 4521 4739</a>
+                        </p>
+                        <p>
+                            <a href="mailto:info@openvalue.de" class="icon regular fa-envelope">
+                                info@openvalue.de
+                            </a>
+                        </p>
+                        <!-- <h3>Email</h3>
+					<p><a href="mailto:info@openvalue.de">info@openvalue.de</a></p>
+							 <h3>Phone</h3>
+					<p><a href="tel:+498945214739">+49 89 4521 4739</a></p> -->
+                    </div>
+                </section>
+                <section class="alt">
+                    <div>
+                        <h2>
+                            <a href="#">
+                                <img src="images/at.png" class="flag">Vienna
+                            </a>
+                        </h2>
+                        <p class="bold">
+                            Jakob-Klar-Straße 4
+                            <br>
+                            80796 München
+                        </p>
+                        <p>
+                            <a href="tel:+498945214739" class="icon solid fa-phone"> +49 89 4521 4739</a>
+                        </p>
+                        <p>
+                            <a href="mailto:info@openvalue.de" class="icon regular fa-envelope">info@openvalue.de</a>
+                        </p>
+                    </div>
+                </section>
+                <!--<section>
+					<h3>Social</h3>
+					<ul class="icons alt">
+						<li><a href="https://twitter.com/OpenValue" class="icon brands alt fa-twitter"><span
+									class="label">Twitter</span></a></li>
+						<li><a href="https://talks.openvalue.tech/" class="icon brands alt fa-youtube"><span
+									class="label">YouTube</span></a>
+						</li>
+					</ul>
+				</section>-->
+            </section>
+        </footer>
+        <!-- Copyright -->
+        <div id="copyright">
+            <ul>
+                <li>&copy; OpenValue</li>
+                <li>
+                    <a href="#" target="_blank">Privacy</a>
+                </li>
+                <li>
+                    <a href="#" target="_blank">Imprint</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
