@@ -62,6 +62,20 @@ input, select, textarea {
 	appearance: none;
 }
 
+.clearfix::before,
+.clearfix::after {
+  content: " ";
+  display: table;
+} 
+
+.clearfix::after {
+  clear: both;
+}
+
+.clearfix {
+  *zoom: 1; /* Für den IE6 und IE7 */
+}
+
 /* Basic */
 
 @-ms-viewport {
@@ -3333,7 +3347,17 @@ body.is-preload #intro:not(.hidden)+#header+#nav {
 #main>.post h3 {
 	font-size: 2rem;
 	line-height: 1.1;
-	margin: 0 0 2rem 0;
+	margin: 4rem 0 2rem 0;
+	text-transform: none;
+}
+
+/*edit*/
+
+#main>.post h4 {
+	font-size: 1.5rem;
+	line-height: 1.1;
+	margin: 4rem 0 2rem 0;
+	text-transform: none;
 }
 
 /*edit*/
@@ -3344,11 +3368,79 @@ body.is-preload #intro:not(.hidden)+#header+#nav {
 
 /*edit*/
 
-#main>.post img {
+#main>.post figure{
+	width: -webkit-min-content;
+  	width: -moz-min-content;
+	width: min-content;
 	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	width: 80%;
+	margin: 4rem 0 4rem 0;
+	text-align: center;
+}
+
+/*edit*/
+
+#main>.post figure.caption .image1 {
+	width: 45rem;
+}
+
+/*edit*/
+
+#main>.post figure.caption .image2 {
+	width: 20rem;
+}
+
+/*edit*/
+
+#main>.post figure.caption figcaption {
+	display: inline-block;
+	text-align: left;
+	font-size: 0.6em;
+}
+
+/*edit*/
+
+#main>.post figure.images {
+	width: 100%;
+	margin: 4rem 0 4rem 0;
+	overflow: auto;
+}
+
+/*edit*/
+
+.left {
+	float: left;
+	width: 25rem;
+	margin-right: 3rem;
+}
+
+/*edit*/
+
+div.clearfix {
+	width: 100%;
+}
+
+/*edit*/
+
+.end-box {
+	width: 100%;
+	border: transparent;
+	font-size: 100%;
+	padding: 1rem;
+	border-color: #e2e2e2;
+	background-color: #f5f5f5;
+}
+
+/*edit*/
+
+.end-box img {
+	float: left;
+	margin-right: 2rem;
+}
+
+/*edit*/
+
+.end-box p {
+	padding: 0rem;
 }
 
 #main>.post.featured {
