@@ -53,15 +53,15 @@
             <section class="post">
                 <header class="major">
                     <span class="date">April 25, 2017</span>
-                    <h1>JSR-381
+                    <h1>JSR-381: A Standard Java API<br/>for Visual Recognition<br/>using Machine Learning
                     </h1>
                     <p>
-                        A Standard Java API for Visual Recognition using Machine Learning
+                        
                     </p>
                 </header>
-                <div class="image main">
+                <span class="image main">
                     <img src="../images/pic01.jpg" alt="">
-                </div>
+                </span>
                 <p>
                     At this point, most of us know Machine Learning (ML) as recognizing patterns in your data,
                     anticipating the likely future behavior of similar data and taking steps to maximize benefits
@@ -91,7 +91,7 @@
                     large effort to standardize this type of input and therefore won’t be covered in this JSR. For now,
                     the following features will be included into JSR-381 to simplify training and using the ML model:
                 </p>
-                <ul>
+                <ul class="ul-text">
                     <li>
                         Binary classification to classify input which has the outcome true/false, yes/no, dark/bright,
                         etc;
@@ -160,7 +160,7 @@
                     like you would with any classifier.
                 </p>
                 <figure class="caption">
-                    <img class="image1" src="../images\article-images\jsr-381-visual-recognition\image1.png">
+                    <img class="image1" src="../images/article-images/jsr-381-visual-recognition/image1.png">
                     <figcaption>Image 1: Architecture of convolutional neural network (source:
                         http://www.deepnetts.com/blog/from-linear-regression-to-deep-learning-in-5-minutes.html)
                     </figcaption>
@@ -176,8 +176,8 @@
                     these are the most iconic aircrafts that I’m talking about:
                 </p>
                 <div class="clearfix">
-                    <img class="left" src="../images\article-images\jsr-381-visual-recognition\TieFighter.png">
-                    <img class="left" src="../images\article-images\jsr-381-visual-recognition\MillenniumFalcon.png">
+                    <img class="left" src="../images/article-images/jsr-381-visual-recognition/TieFighter.png">
+                    <img class="left" src="../images/article-images/jsr-381-visual-recognition/MillenniumFalcon.png">
                 </div>
                 <div class="clearfix">
                     <p class="left">
@@ -286,7 +286,7 @@ ImageClassifier&lt;BufferedImage> classifier = NeuralNetImageClassifier.builder(
 ...
                 </code></pre>
                 <figure class="caption">
-                    <img class="image2" src="../images\article-images\jsr-381-visual-recognition\image2.png">
+                    <img class="image2" src="../images/article-images/jsr-381-visual-recognition/image2.png">
                     <figcaption>Image 2: Architecture visualized using DeepNetts Platform
                     </figcaption>
                 </figure>
@@ -337,7 +337,7 @@ ImageClassifier&lt;BufferedImage> classifier = NeuralNetImageClassifier.builder(
                     InputStream or File as input:
                 </p>
                 <figure class="caption">
-                    <img class="image2" src="../images\article-images\jsr-381-visual-recognition\image3.png">
+                    <img class="image2" src="../images/article-images/jsr-381-visual-recognition/image3.png">
                     <figcaption>Image 3: Tie Fighter image used as input.
                     </figcaption>
                 </figure>
@@ -392,7 +392,7 @@ System.out.println(results)
                 <hr />
                 <div class="clearfix end-box">
                     <img
-                        src="C:\Users\Chris\Documents\Projects\OpenValue-Blog\images\article-images\jsr-381-visual-recognition\image4.png">
+                        src="../images/article-images/jsr-381-visual-recognition/image4.png">
                     <p>
                         Kevin Berendsen is software engineer at OpenValue, maintainer of JSR-381 and passionate about
                         bringing Java and ML together.
