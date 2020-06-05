@@ -52,16 +52,21 @@
             <!-- Post -->
             <section class="post">
                 <header class="major">
-                    <span class="date">April 25, 2017</span>
+                    <span class="date">May 20, 2020</span>
                     <h1>JSR-381: A Standard Java API<br />for Visual Recognition<br />using Machine Learning
                     </h1>
-                    <p>
-
-                    </p>
                 </header>
-                <span class="image main">
-                    <img src="../images/pic01.jpg" alt="">
-                </span>
+                <div class="image main">
+                    <figure>
+                        <img src="../images/pic02.jpg" alt="">
+                        <figcaption>
+                            Image by <a
+                                href="https://pixabay.com/users/TheDigitalArtist-202249/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4063134">
+                                Pete Linforth</a> from <a
+                                href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4063134">Pixabay</a>
+                        </figcaption>
+                    </figure>
+                </div>
                 <p>
                     At this point, most of us know Machine Learning (ML) as recognizing patterns in your data,
                     anticipating the likely future behavior of similar data and taking steps to maximize benefits
@@ -160,7 +165,7 @@
                     like you would with any classifier.
                 </p>
                 <figure class="caption">
-                    <img class="image1" src="../images/article-images/jsr-381-visual-recognition/image1.png">
+                    <img class="image75" src="../images/article-images/jsr-381-visual-recognition/image1.png">
                     <figcaption>Image 1: Architecture of convolutional neural network (source:
                         http://www.deepnetts.com/blog/from-linear-regression-to-deep-learning-in-5-minutes.html)
                     </figcaption>
@@ -176,8 +181,8 @@
                     these are the most iconic aircrafts that I’m talking about:
                 </p>
                 <div class="clearfix">
-                    <img class="left" src="../images/article-images/jsr-381-visual-recognition/TieFighter.png">
-                    <img class="left" src="../images/article-images/jsr-381-visual-recognition/MillenniumFalcon.png">
+                    <img class="left" src="../images/article-images/jsr-381-visual-recognition/image4.png">
+                    <img class="left" src="../images/article-images/jsr-381-visual-recognition/image5.png">
                 </div>
                 <div class="clearfix">
                     <p class="left">
@@ -216,7 +221,7 @@
                     builder instance:
                 </p>
                 <pre><code>
-ImageClassifier&lt;?> classifier = NeuralNetImageClassifier.builder()
+ImageClassifier&lt;?&gt; classifier = NeuralNetImageClassifier.builder()
     ...
     .build();
                 </code></pre>
@@ -227,7 +232,7 @@ ImageClassifier&lt;?> classifier = NeuralNetImageClassifier.builder()
                     BufferedImage class. That one is supported by all implementations so we can safely use it:
                 </p>
                 <pre><code>
-ImageClassifier&lt;BufferedImage> classifier = NeuralNetImageClassifier.builder()
+ImageClassifier&lt;BufferedImage&gt; classifier = NeuralNetImageClassifier.builder()
     <b>.inputClass(BufferedImage.class)</b>
     ...
     .build();                    
@@ -252,7 +257,7 @@ ImageClassifier&lt;BufferedImage> classifier = NeuralNetImageClassifier.builder(
                     the neural network.
                 </p>
                 <pre><code>
-ImageClassifier&lt;BufferedImage> classifier = NeuralNetImageClassifier.builder()
+ImageClassifier&lt;BufferedImage&gt; classifier = NeuralNetImageClassifier.builder()
     .inputClass(BufferedImage.class)
     <b>.imageWidth(128)</b>
     <b>.imageHeight(128)</b>
@@ -264,7 +269,7 @@ ImageClassifier&lt;BufferedImage> classifier = NeuralNetImageClassifier.builder(
                     that contains the mapping of all images with the corresponding label.
                 </p>
                 <pre><code>
-ImageClassifier&lt;BufferedImage> classifier = NeuralNetImageClassifier.builder()
+ImageClassifier&lt;BufferedImage&gt; classifier = NeuralNetImageClassifier.builder()
     .inputClass(BufferedImage.class)
     .imageWidth(128)
     .imageHeight(128)
@@ -286,7 +291,7 @@ ImageClassifier&lt;BufferedImage> classifier = NeuralNetImageClassifier.builder(
 ...
                 </code></pre>
                 <figure class="caption">
-                    <img class="image2" src="../images/article-images/jsr-381-visual-recognition/image2.png">
+                    <img class="image40" src="../images/article-images/jsr-381-visual-recognition/image2.png">
                     <figcaption>Image 2: Architecture visualized using DeepNetts Platform
                     </figcaption>
                 </figure>
@@ -307,7 +312,7 @@ ImageClassifier&lt;BufferedImage> classifier = NeuralNetImageClassifier.builder(
                     training it with more iterations didn’t show any significant difference in the accuracy.
                 </p>
                 <pre><code>
-ImageClassifier&lt;BufferedImage> classifier = NeuralNetImageClassifier.builder()
+ImageClassifier&lt;BufferedImage&gt; classifier = NeuralNetImageClassifier.builder()
     .inputClass(BufferedImage.class)
     .imageWidth(128)
     .imageHeight(128)
@@ -337,13 +342,13 @@ ImageClassifier&lt;BufferedImage> classifier = NeuralNetImageClassifier.builder(
                     InputStream or File as input:
                 </p>
                 <figure class="caption">
-                    <img class="image2" src="../images/article-images/jsr-381-visual-recognition/image3.png">
-                    <figcaption>Image 3: Tie Fighter image used as input.
+                    <img class="image40" src="../images/article-images/jsr-381-visual-recognition/image3.png">
+                    <figcaption>Image 3: Tie Fighter image used as input
                     </figcaption>
                 </figure>
                 <pre><code>
 BufferedImage tieFighter = ...;
-Map&lt;String, Float> results = imageClassifier.classify(tieFighter);
+Map&lt;String, Float&gt; results = imageClassifier.classify(tieFighter);
 System.out.println(results)
                 </code></pre>
                 <p>
@@ -390,8 +395,11 @@ System.out.println(results)
                     <a href="https://groups.io/g/visrec">https://groups.io/g/visrec</a>
                 </p>
                 <hr />
-                <div class="clearfix end-box">
-                    <img src="../images/article-images/jsr-381-visual-recognition/image4.png">
+                <div class="clearfix end-bio">
+                    <img src="../images/article-images/jsr-381-visual-recognition/image-kb.png">
+                    <h1>
+                        Kevin Berendsen
+                    </h1>
                     <p>
                         Kevin Berendsen is software engineer at OpenValue, maintainer of JSR-381 and passionate about
                         bringing Java and ML together.

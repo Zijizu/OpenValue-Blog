@@ -52,350 +52,498 @@
             <!-- Post -->
             <section class="post">
                 <header class="major">
-                    <span class="date">April 25, 2017</span>
-                    <h1>JSR-381: A Standard Java API<br />for Visual Recognition<br />using Machine Learning
+                    <span class="date">May 28, 2020</span>
+                    <h1>Building serverless Java<br />
+                        applications using<br />
+                        Micronaut and OpenFaaS
                     </h1>
                     <p>
 
                     </p>
                 </header>
-                <span class="image main">
-                    <img src="../images/pic01.jpg" alt="">
-                </span>
+                <div class="image main">
+                    <figure>
+                        <img src="../images/pic01.jpg" alt="">
+                        <figcaption>
+                            Image by <a
+                                href="https://pixabay.com/users/TayebMEZAHDIA-4194100/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3174729">
+                                Tayeb MEZAHDIA</a> from <a
+                                href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3174729">Pixabay</a>
+                        </figcaption>
+                    </figure>
+                </div>
+                <h3>
+                    Introduction
+                </h3>
                 <p>
-                    At this point, most of us know Machine Learning (ML) as recognizing patterns in your data,
-                    anticipating the likely future behavior of similar data and taking steps to maximize benefits
-                    based on those predictions. It represents a massive change in how we solve problems and has
-                    long-term effects to the very foundations of computing and to the world in general.
+                    When working on microservices in the Java ecosystem, especially using Spring (Boot), you will notice
+                    the long start-up time that application will have, let alone the high memory consumption they will
+                    have. The overhead of each single microservice will eventually take its costs on the system. Looking
+                    at a framework such as Micronaut could help out to reduce this overhead without loosing any
+                    developer's productivity. Not only "classic" applications can be build using Micronaut, but also
+                    serverless applications, functions, can be build and deployed on a cloud environment or on
+                    Kubernetes using OpenFaaS. Let's dive into it!
                 </p>
                 <p>
-                    Most ML toolkits require you to learn Python. Python is one of the leading programming languages in
-                    data science and ML. But there are 10 million Java developers on the planet that need to build
-                    world-class production ML applications that leverage our years of expertise in development and
-                    deployment.
+                    Small side note: during this article some references and comparisons are made with Spring. Some
+                    knowledge about Spring can therefore be useful.
                 </p>
+                <h3>
+                    Introducing Micronaut
+                </h3>
                 <p>
-                    This article will cover a deep learning introduction and create a ML model that will be able to
-                    classify Star Wars aircrafts in just a few lines of code using Java Specification Request #JSR-381
-                    (“JSR-381”).
+                    Micronaut is a JVM based framework designed for building modular microservices. When you open a
+                    Micronaut project, you won't be surprised at first sight, it will even look and feel the same as the
+                    common Spring (Boot) projects in the Java world.
+                    <br />
+                    However the differences are far to be small or subtle and should be very well understood before
+                    start taking such projects into production. On the other hand, starting discovering the Micronaut
+                    world will go very smoothly and the understanding will grow along as you are hacking your way
+                    through it.
                 </p>
                 <h4>
-                    JSR-381
+                    Annotations and Micronaut
                 </h4>
                 <p>
-                    The goal of JSR-381 is to develop a standardized Java-friendly API which can be used to solve small
-                    and complex tasks by applying ML specifically to visual recognition use cases.
+                    Where Spring is known to use a lot of reflection during runtime, Micronaut is doing the same work
+                    but compile time. One example is the Spring data queries, that are generated runtime. Micronaut will
+                    generate those same queries compile time minimizing the used memory at runtime.
+                    <br />
+                    Each Bean created will be enriched compile time creating a so-called <code>BeanDefinition</code>
+                    class containing the bean's requirement and it's constructor. All these classes are processed using
+                    the <code>`BeanDefinitionInjectProcessor`</code>.
                 </p>
                 <p>
-                    Each ML engine (eg, TensorFlow, Deep Netts) has its own way of accepting input. It is a relatively
-                    large effort to standardize this type of input and therefore won’t be covered in this JSR. For now,
-                    the following features will be included into JSR-381 to simplify training and using the ML model:
+                    Also, Micronaut relies on the Java EE Dependency Injection, hence beans can be annotated with
+                    `<code>@Singleton</code>` and can be used with `@Inject`. The lifecycle of those beans will be
+                    managed by Micronaut itself.
+                </p>
+                <h3>
+                    Building a Micronaut component
+                </h3>
+                <p>
+                    For everything that has to do with Micronaut, a CLI (Command Line Interface) tool can be used. This
+                    can be installed by simply following the steps in the official <a
+                        href="https://docs.micronaut.io/latest/guide/index.html#buildCLI">documentation</a>.
+                </p>
+                <p>
+                    The CLI tool is a good starting point for any project using Micronaut and will generate the backbone
+                    structure of the project and some useful files for development. It does the entire scaffolding for
+                    you. For each application type a list of features can be set up to generate all the necessary
+                    configuration needed for those features.
+                    <br />
+                    The CLI tool supports three JVM languages: Java, Kotlin and Groovy and two build tools: Maven and
+                    Gradle. In case of a Maven project a Maven wrapper will be generated as well as a pom.xml.
+                </p>
+                <p>
+                    Next to that, the CLI tool will generate a `Micronaut-cli.yml`, this will be the input for the CLI
+                    tool for any further operations and will contain the project's name and profile.
+                </p>
+                <p>
+                    Coming from the Spring world, you won't be surprised to find the following in the main/resources
+                    directory: an `application.yml`. This file contains, just as it will in a Spring application, all
+                    the configuration settings for the application.
+                </p>
+                <h3>
+                    Let's start
+                </h3>
+                <p>
+                    During this article, we will be building the following application:
+                </p>
+                <p>
+                    ![](./bookstore-arch.png)
+                </p>
+                <p>
+                    A simple application will serve a book given an author. To do so, it will call a function that
+                    returns all the books of an author.
+                </p>
+                <h4>
+                    Building an application
+                </h4>
+                <p>
+                    In this example, the application will contain a REST endpoint to ask for a book of a particular
+                    author. This endpoint will have to a call a function to retrieve this information. This application
+                    will therefore be a http-server as well as a http-client and will be deployed on Kubernetes.
+                    <br />
+                    Therefore the command to generate the basis of the application will be:
+                </p>
+                <pre><code>
+```bash
+mn create-app bookstore-service --build=Maven --lang=java --features=Kubernetes,netflix-hystrix,http-server,http-client                   
+```                    
+                </code></pre>
+                <p>
+                    Because the service calls a function, netflix-hystrix is needed. A function needs some time to
+                    start-up (warming up time). This does not mean it will take a lot of time, but the HTTP call will
+                    always take some time for sure. To avoid the function returning a HTTP response with status 500
+                    straightaway, a retry mechanism is needed to make sure an answer is retrieved as soon as it becomes
+                    available.
+                </p>
+                <p>
+                    As the application will be deployed on Kubernetes as indicated with the feature `Kubernetes`, the
+                    `create-app` command will also generate a `k8s.yml` which will serve as a basis for the deployment.
+                    Of course this will have to be adjusted to the requirements of the environment where it will be
+                    deployed to. This Kubernetes configuration will have a deployment and a service.
+                </p>
+                <p>
+                    By default, such an application will be running on port 8080. To change that the following property
+                    in the application.yml can be set to the preferred value:
+                </p>
+                <pre><code>
+```yaml
+micronaut:
+    server:
+        port: 8081
+```
+                </code></pre>
+                <p>
+                    Now it's time to add an endpoint to retrieve all the books given a certain author. For that, the
+                    HTTP functionality of Micronaut will be used.
+                </p>
+                <pre><code>
+```java
+package bookstore.service.store;
+
+import io.Micronaut.http.annotation.Controller;
+import io.Micronaut.http.annotation.Get;
+import io.Micronaut.http.annotation.PathVariable;
+
+@Controller("books")
+public class BookstoreController {
+
+    @Get("/{author}")
+    public Book retrieveBooksByAuthor() {
+        return new Book("1000 new things", "John Doe");
+    }
+
+}
+```
+                </code></pre>
+                <p>
+                    This will look a lot like a Spring Controller, right? Except that the annotations are used from the
+                    Micronaut package.
+                </p>
+                <p>
+                    Remarkable here is the implementation of the `Book` DTO:
+                </p>
+                <pre><code>
+```java
+@Introspected
+public class Book implements Serializable {
+
+    private String title;
+    private String author;
+                    
+    public Book(String title, String author) {
+        this.title  = title;
+        this.author = author;
+    }
+                         
+    // some getters
+}
+```                    
+                </code></pre>
+                <p>
+                    The `@Introspected` annotation which is needed for reflection free DTO's. At compile time, a check
+                    will be performed to see if all the properties can be initialized for the DTO.
+                </p>
+                <p>
+                    It is interesting to have a look at the compiled files for this object.
+                </p>
+                <h4>
+                    Building a function
+                </h4>
+                <p>
+                    A function will be build to serve data that needs to be served quickly to our application without
+                    using a lot of logic. In our example, the function will be returning a list of books given an
+                    author's name. Let's start with the most simple case:
+                </p>
+                <pre><code>
+```bash
+mn create-function get-books-by-author --build=Maven --features=openfaas                    
+```
+                </code></pre>
+                <p>
+                    Note: to be able to see all the features available for a function use: `mn create-function --help`
+                </p>
+                <p>
+                    To make the function buildable, one AWS dependency has to be removed (in this example no AWS
+                    functionality will be used and it will return class path errors):
+                    <br />
+                    At the time of writing this was still generated for a function running on OpenFaaS.
+                </p>
+                <pre><code>
+```xml
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.amazonaws&lt;/groupId&gt;
+        &lt;artifactId&gt;aws-lambda-java-log4j2&lt;/artifactId&gt;
+        &lt;version&gt;1.0.0&lt;/version&gt;
+        &lt;scope&gt;runtime&lt;/scope&gt;
+    &lt;/dependency&gt;
+```
+                </code></pre>
+                <p>
+                    At time of writing, the Dockerfile will still have a bug. The Dockerfile is based on the OpenJDK 8
+                    image, but it should be based on th e OpenJDK 13 image to not encounter any runtime/compilation
+                    problems.
+                </p>
+                <p>
+                    In the following line of code in the Dockerfile, two flags have to be removed:
+                </p>
+                <pre><code>
+`ENV fprocess="java -Dcom.sun.management.jmxremote -noverify -XX:TieredStopAtLevel=1 -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -jar Handler.jar"`
+                </code></pre>
+                <p>
+                    `-noverify` and `-XX:+UseCGroupMemoryLimitForHeap` are deprecated in JDK 13 and are therefore not
+                    needed. The line of code will then become:
+                </p>
+                <pre><code>
+`ENV fprocess="java -Dcom.sun.management.jmxremote -XX:TieredStopAtLevel=1 -XX:+UnlockExperimentalVMOptions -jar Handler.jar"
+                </code></pre>
+                <p>
+                    Next we need to add `log4j2.xml` as configuration of the log4 logging.
+                </p>
+                <p>
+                    Also the following must be added for the logging in the shade jar:
+                </p>
+                <pre><code>
+```xml
+&lt;transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"&gt;
+    &lt;mainClass&gt;${exec.mainClass}&lt;/mainClass&gt;
+    &lt;manifestEntries&gt;
+        &lt;Multi-Release&gt;true&lt;/Multi-Release&gt;
+    &lt;/manifestEntries&gt;
+&lt;/transformer&gt;
+```
+                </code></pre>
+                <p>
+                    Now, for convenience, the logging level will only be set to ERROR, by changing the fprocess command
+                    in the Dockerfile a bit more:
+                </p>
+                <pre><code>
+`ENV fprocess="java -Dorg.apache.logging.log4j.simplelog.StatusLogger.level=ERROR -Dcom.sun.management.jmxremote -XX:TieredStopAtLevel=1 -XX:+UnlockExperimentalVMOptions -jar Handler.jar"`
+                </code></pre>
+                <p>
+                    To keep the function as simple as possible, the function class won't be extending the
+                    `FunctionInitializer`
+                </p>
+                <h3>
+                    Deploying Micronaut
+                </h3>
+                <p>
+                    Now an environment is needed to deploy this. OpenFaaS is a good option for deploying an application
+                    or function on Kubernetes. For a Micronaut function, OpenFaaS will deploy a pod. On this pod nothing
+                    will be running until the endpoint is called. At that point an application will start running and
+                    return the endpoint call.
+                </p>
+                <h4>
+                    Installing OpenFaaS
+                </h4>
+                <p>
+                    Installing OpenFaaS is quite easy and should not take too much time. When working on my project, I
+                    wanted to explore the Micronaut functions. However, deploying to AWS was not an option and my
+                    curiosity was triggered by OpenFaaS. Installing OpenFaaS locally is quite easy.
+                    <br />
+                    OpenFaaS makes it easy to deploy functions and applications on an existing Kubernetes cluster.
+                </p>
+                <p>
+                    Instructions for the installation are listed <a
+                        href="https://docs.openfaas.com/deployment/kubernetes/">here</a>.
+                </p>
+                <p>
+                    In a nutshell, start with installing the CLI:
+                </p>
+                <pre><code>
+```bash
+brew install faas-cli
+```
+                </code></pre>
+                <p>
+                    Then before installing OpenFaaS, install Arkade (which will be fastest option to install OpenFaaS
+                    later on):
+                </p>
+                <pre><code>
+```bash
+curl -SLsf https://dl.get-arkade.dev/ | sudo sh
+```
+                </code></pre>
+                <p>
+                    Now you can finally install OpenFaaS on your local Kubernetes cluster:
+                </p>
+                <pre><code>
+```bash
+arkade install openfaas
+```
+                </code></pre>
+                <p>
+                    Now the trick is not to ignore all the lines of logging that will come out of the installation,
+                    there are some useful instructions there that will help you finish the installation. To start with
+                    checking whether all the deployments where successful:
+                </p>
+                <pre><code>
+```bash
+kubectl -n openfaas get deployments -l "release=openfaas, app=openfaas"
+```
+                </code></pre>
+                <p>
+                    The successful deployments should be:
+                </p>
+                <pre><code>
+                  
+```
+NAME                READY   UP-TO-DATE   AVAILABLE   AGE
+
+alertmanager        1/1     1            1           6d21h
+
+basic-auth-plugin   1/1     1            1           6d21h
+
+faas-idler          1/1     1            1           6d21h
+
+gateway             1/1     1            1           6d21h
+
+nats                1/1     1            1           6d21h
+
+prometheus          1/1     1            1           6d21h
+
+queue-worker        1/1     1            1           6d21h
+```  
+                </code></pre>
+                <p>
+                    Now one final step has to be taken. The Gateway used by OpenFaaS should be forwarded:
+                </p>
+                <pre><code>
+```bash
+kubectl -n openfaas rollout status deploy/gateway
+kubectl -n openfaas port-foward svc/gateway 8080:8080
+```
+                </code></pre>
+                <p>
+                    Do not forget setup the login:
+                </p>
+                <pre><code>
+```bash
+PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath="{.data.basic-auth-password}" | base64 --decode; echo)
+echo -n $PASSWORD | faas-cli login --username admin --password-stdin
+```
+                </code></pre>
+                <p>
+                    OpenFaaS should now be all up and running!
+                </p>
+                <h4>
+                    Deploying a Micronaut function
+                </h4>
+                <p>
+                    Testing the function on OpenFaaS:
+                </p>
+                <p>
+                    OpenFaaS requires a registry to push and deploy the function. For local development, the registry
+                    could be started within a docker container:
+                </p>
+                <pre><code>
+```bash
+sudo docker run -d -p 5000:5000 --name registry registry:2
+```
+                </code></pre>
+                <p>
+                    Looking more closely to the `function.yml`, after the provider description (which will only specify
+                    the endpoint of the gateway), the function is described as a docker image that would have to be ran:
+                </p>
+                <pre><code>
+```yaml
+provider:
+    name: openfaas
+    gateway: http://127.0.0.1:8080
+functions:
+    get-books-by-author:
+        lang: dockerfile
+        handler: .
+        image: localhost:5000/get-books-by-author:latest
+```
+                </code></pre>
+                <p>
+                    The image in this example is prefixed with `localhost:5000/` which is the local registry that was
+                    launched by the previous bash command.
+                </p>
+                <p>
+                    Now let's use the magical commands of the `faas-cli` to deploy and run the function:
+                </p>
+                <pre><code>
+```bash
+faas-cli build -f function.yml
+faas-cli push -f function.yml
+faas-cli deploy -f function.yml
+```
+                </code></pre>
+                <p>
+                    Now call the function through the OpenFaaS Gateway:
+                </p>
+                <pre><code>
+```bash
+curl -X GET http://127.0.0.1:8080/function/get-books-by-author -H 'Content-Type: application/json' -d $'{"name":"Piet"}'
+```
+                </code></pre>
+                <p>
+                    To verify that the function is running:
+                </p>
+                <pre><code>
+```bash
+kubectl -n openfaas-fn get pods
+```
+                </code></pre>
+                <p>
+                    Now this function has a running pod, but it is not running as such. The pod will be put up as a
+                    placeholder for the function. Once a REST call is made to the endpoint, the application will be
+                    started. This is done with <a href="https://docs.openfaas.com/architecture/watchdog/">Watchdog</a>.
+                </p>
+                <h2>
+                    Resources
+                </h2>
+                <p>
+                    Everything in this article was developed with the following environment:
                 </p>
                 <ul class="ul-text">
                     <li>
-                        Binary classification to classify input which has the outcome true/false, yes/no, dark/bright,
-                        etc;
+                        Mac OSX Catalina
                     </li>
                     <li>
-                        Image classification to classify an image as input and the outcome of two or more trained
-                        labels, depending on the model;
+                        Docker Desktop (Engine v.19.03.5, Kubernetes v1.15.5)
                     </li>
                     <li>
-                        Object detection to detect and classify one or more fragments in the image as input with as
-                        outcome, one or more trained labels;
-                    </li>
-                    <li>
-                        Training tools to build the ML model for binary classification, image classification and object
-                        detection.
+                        OpenJDK 13.0.2
                     </li>
                 </ul>
                 <p>
-                    At the same time as the development of the API, the first implementation of the API will be
-                    developed
-                    as well. This is the so called “Reference Implementation” (RI) which will meet all the requirements
-                    of the API as prescribed by the Java Community Process (JCP). The RI of JSR-381 uses Deep Netts, an
-                    open source deep learning engine written in pure Java. Amazon has its own implementation of JSR-381
-                    which will support TensorFlow, Apache MXNets and other upcoming engines using their abstraction API
-                    called Deep Java Library (DJL).
+                    References:
                 </p>
-                <h4>
-                    Supported algorithms
-                </h4>
-                <p>
-                    Not every developer is a mathematician. Neither am I. With JSR-381 you won’t have to understand the
-                    underlying math of these algorithms because it’s developed to allow you to use common Java design
-                    patterns instead of generated wrappers for native libraries. JSR-381 will only support neural
-                    networks by default and expose a high level API to use. Each implementation of JSR-381 will have to
-                    support neural networks but may also expose other algorithms and implementation specific algorithms
-                    to solve complex problems, which are better solved by algorithms other than neural networks. This
-                    way JSR-381 can be used by beginners and advanced ML Java developers alike.
-                </p>
-                <h3>
-                    Quick dive into understanding classification and deep learning
-                </h3>
-                <p>
-                    Classification is commonly used to determine whether the given input is answer A, B or even C. For
-                    each classification model, it needs a given set of labels and a prepared dataset. A part of
-                    preparing the dataset labelling the data. For example: a picture of a cat is labeled as cat and a
-                    picture of the dog is labeled as dog. This way the ML model will be able to learn and tell whether a
-                    newly given picture has to be classified as a cat or a dog. As previously explained, binary
-                    classification will only contain two labels which will be complete opposites of each other. The
-                    scenario of the dog and the cat is also binary classification. But it might also need to classify
-                    all bird pictures as birds. Afterwards the dataset and labels will be expanded with new data and the
-                    model will be retrained to classify cats, dogs and birds. This is called multiclass classification.
-                </p>
-                <p>
-                    MNIST is the most known multiclass classification ML model. MNIST is able to classify numeric
-                    characters from 0 to 9. Every ML engine has an example using MNIST because the dataset is free to
-                    download. The MNIST dataset has already been prepared to be trained with high accuracy.
-                </p>
-                <h4>
-                    Deep learning
-                </h4>
-                <p>
-                    Deep learning is a specific ML technique based on using multiple neural network layers. There are
-                    different algorithms but the one that’s often applied for image classification is called
-                    convolutional neural network. This type of algorithm has adaptive image filtering through network
-                    layers and then performs the classification on the trained model and results into labeled output
-                    like you would with any classifier.
-                </p>
-                <figure class="caption">
-                    <img class="image1" src="../images/article-images/jsr-381-visual-recognition/image1.png">
-                    <figcaption>Image 1: Architecture of convolutional neural network (source:
-                        http://www.deepnetts.com/blog/from-linear-regression-to-deep-learning-in-5-minutes.html)
-                    </figcaption>
-                </figure>
-                <h3>
-                    Use the Force to Learn about ML
-                </h3>
-                <p>Now that we have a basic understanding of the use of classification and deep learning, let's create a
-                    critically important application example in which it identifies two aircrafts from the Star Wars
-                    franchise. In this article we’re building a binary classifier to solve this problem. The reason why
-                    we're not using a multi-class classifier is because we’re only identifying the input image as the
-                    Millennium Falcon or the Tie Fighter. For those who are not familiar these names, shame on you! But
-                    these are the most iconic aircrafts that I’m talking about:
-                </p>
-                <div class="clearfix">
-                    <img class="left" src="../images/article-images/jsr-381-visual-recognition/TieFighter.png">
-                    <img class="left" src="../images/article-images/jsr-381-visual-recognition/MillenniumFalcon.png">
-                </div>
-                <div class="clearfix">
-                    <p class="left">
-                        Tie Fighter
-                    </p>
-                    <p class="left">
-                        Millennium Falcon
-                    </p>
-                </div>
-                <h4>
-                    Dataset preparation
-                </h4>
-                <p>As mentioned, each ML model will start by gathering the dataset. This can be a very time consuming
-                    process, therefore we will skip this part for now. We’ll use a prepared dataset containing only 60~
-                    images for each label. Normally you’d want to create a dataset that contains many more images but it
-                    will work just fine for our use case. The general rule of preparing the dataset is to keep the
-                    amount of images equal to each label otherwise you might create a biased ML model. Our dataset
-                    contains a labels file, a training file which maps the images to a label and a folder of images.
-                </p>
-                <h4>
-                    Defining the neural network architecture
-                </h4>
-                <p>
-                    The image classifier demands a network architecture to train the ML model. Picking the right
-                    architecture is important but depending on the needs of the project, you might want to pick a
-                    smaller architecture to reduce training time and still train a model that will have a good accuracy.
-                    Because we have a really small dataset and picking the largest architecture won’t make any
-                    difference in the resulting accuracy, we will use the architecture that is used in the MNIST
-                    example.
-                </p>
-                <h4>
-                    Training the ImageClassifier
-                </h4>
-                <p>
-                    Using JSR-381 exposes the ImageClassifier using neural networks. We start by first creating a new
-                    builder instance:
-                </p>
-                <pre><code>
-ImageClassifier&lt;?> classifier = NeuralNetImageClassifier.builder()
-    ...
-    .build();
-                </code></pre>
-                <p>
-                    It’s important to let the builder know which class type you wish to perform classification on.
-                    Because
-                    not all implementations will be able to classify that input class with the exception of the
-                    BufferedImage class. That one is supported by all implementations so we can safely use it:
-                </p>
-                <pre><code>
-ImageClassifier&lt;BufferedImage> classifier = NeuralNetImageClassifier.builder()
-    <b>.inputClass(BufferedImage.class)</b>
-    ...
-    .build();                    
-                </code></pre>
-                <p>
-                    You can see the difference between the snippets where the generic type of the resulting
-                    ImageClassifier is changed. There’s no need to cast the resulting ImageClassifier yourself because
-                    that’s been taken care of safely within the API.
-                </p>
-
-                <p> The dataset configuration is coming next. All images within the dataset should be normalized. This
-                    means that all images should have the same width and height. Depending on the implementation, the
-                    implementation might normalize the images as a preparation step but will definitely slow the process
-                    of training the actual ML as it’s a part of preparing the dataset. Increasing the size will allow
-                    better accuracy most of the time but it also requires more computing time so training the model will
-                    take longer.
-                </p>
-
-                <p> The MNIST example has an image width and height of 28 pixels. In this use case with these few images
-                    in our dataset, setting the width and height to 128 pixels was showing better results. Bigger
-                    resolutions will contain more content and information that might improve the ML model while training
-                    the neural network.
-                </p>
-                <pre><code>
-ImageClassifier&lt;BufferedImage> classifier = NeuralNetImageClassifier.builder()
-    .inputClass(BufferedImage.class)
-    <b>.imageWidth(128)</b>
-    <b>.imageHeight(128)</b>
-    ...
-    .build();      
-                </code></pre>
-                <p>
-                    Then we specify the location of two files. One for all the labels that you want to use and one file
-                    that contains the mapping of all images with the corresponding label.
-                </p>
-                <pre><code>
-ImageClassifier&lt;BufferedImage> classifier = NeuralNetImageClassifier.builder()
-    .inputClass(BufferedImage.class)
-    .imageWidth(128)
-    .imageHeight(128)
-    <b>.labelsFile(new File("..."))</b>
-    <b>.trainingFile(new File("..."))</b>
-    ...
-    .build();                    
-                </code></pre>
-                <p>
-                    The architecture of the neural network is defined in a JSON file and copied from the MNIST example.
-                    Because we don’t want to change the architecture, there are two layers which have to be changed. The
-                    input layer has to be set the same as the image width and height of 128 pixels and the output layer
-                    should return two labels because we’re only classifying the Millennium Falcon and the Tie Fighter.
-                    We pass the architecture file to the builder.
-                </p>
-                <pre><code>
-...
-..networkArchitecture(new File("...json"))
-...
-                </code></pre>
-                <figure class="caption">
-                    <img class="image2" src="../images/article-images/jsr-381-visual-recognition/image2.png">
-                    <figcaption>Image 2: Architecture visualized using DeepNetts Platform
-                    </figcaption>
-                </figure>
-                <p>
-                    Next we export our model to a file and set that parameter as well. It’s completely optional but
-                    training the model may take some time and you don’t want to retrain the model each time you wish to
-                    use it.
-                </p>
-                <pre><code>
-...
-.exportModel(Paths.get("starwars.dnet"))
-...                
-                </code></pre>
-                <p>
-                    Finally, we have to set the training parameters. These are parameters that have to be experimented
-                    with to “guess” which settings suits the model in order to get the best results in a decent amount
-                    of training time. Training this model only took a couple of minutes. This is relatively fast and
-                    training it with more iterations didn’t show any significant difference in the accuracy.
-                </p>
-                <pre><code>
-ImageClassifier&lt;BufferedImage> classifier = NeuralNetImageClassifier.builder()
-    .inputClass(BufferedImage.class)
-    .imageWidth(128)
-    .imageHeight(128)
-    .labelsFile(new File("...txt"))
-    .trainingFile(new File("...txt"))
-    .networkArchitecture(new File("...json"))
-    .exportModel(Paths.get("starwars.dnet"))
-    <b>.maxEpochs(1000)</b>
-    <b>.maxError(0.3f)</b>
-    <b>.learningRate(0.01f)</b>
-    .build();                    
-                </code></pre>
-                <p>
-                    The maxEpochs setting sets the maximum amount of iterations before stopping the model’s training
-                    process. The maxError setting is used to stop the training once it hits the error rate of the
-                    training process. The learningRate setting is how fast you wish to train the model. With a lower
-                    rate it takes more time to train the model but that doesn’t have to improve the accuracy. Meaning it
-                    will have more iterations/epochs and takes more time to hit the maximum error rate.
-                </p>
-                <h4>
-                    Put the trained model to use
-                </h4>
-                <p>
-                    Finally, we’ve trained the model! Now I’d like to classify an image that was not used in the dataset
-                    and see if my model can identify it. I randomly took images of the Tie Fighter and the Millennium
-                    Falcon from Google search and ran it into the model. The ImageClassifier accepts the generic type,
-                    InputStream or File as input:
-                </p>
-                <figure class="caption">
-                    <img class="image2" src="../images/article-images/jsr-381-visual-recognition/image3.png">
-                    <figcaption>Image 3: Tie Fighter image used as input.
-                    </figcaption>
-                </figure>
-                <pre><code>
-BufferedImage tieFighter = ...;
-Map&lt;String, Float> results = imageClassifier.classify(tieFighter);
-System.out.println(results)
-                </code></pre>
-                <p>
-                    The console would output similarly to:
-                </p>
-                <pre><code>
-{ "tie_fighter": 0.78f, "millennium_falcon": 0.22f }
-                </code></pre>
-                <p>
-                    The accuracy is approximately 80 percent which shows a decent distinction between a Tie Fighter and
-                    a Millennium Falcon. I wouldn’t want to rely on 80 percent accuracy during an intergalactic
-                    dogfight, but it's good enough for our learning purposes. In a future version of the API, additional
-                    statistical evaluation should be performed after training the model to determine the accuracy.
-                </p>
-                <h3>
-                    Summarizing what's learned and what's upcoming
-                </h3>
-                <p>
-                    The article described the goal of JSR-381, taught a basic understanding of image classification and
-                    deep learning and allowed you to create a ML model step by step by using only JSR-381. In case you
-                    want to run only the code, you checkout the GitHub repository at
-                    <a href="https://github.com/JavaVisRec/jsr381-starwars">
-                        https://github.com/JavaVisRec/jsr381-starwars</a>
-                </p>
-                <h4>
-                    What’s to be expected in the future
-                </h4>
-                <p>
-                    Many features beyond the current set are in the planning stages for JSR-381. The following major
-                    features are very likely to be added in the upcoming versions.
-                </p>
-                <ul>
-                    <li>Export models as ONNX (Open Neural Network Exchange);</li>
-                    <li>Model evaluation;</li>
-                    <li>Object detection;</li>
-                    <li>Transfer learning.</li>
+                <ul class="ul-text">
+                    <li>
+                        <a href="http://www.micronaut.io">Official Micronaut documentation</a>
+                    </li>
+                    <li>
+                        <a href="https://www.openfaas.com/">Official OpenFaaS documentation</a>
+                    </li>
+                    <li>
+                        <a href="https://docs.micronaut.io/latest/api/io/micronaut/inject/BeanDefinition.html">Java
+                            Documentation on Micronaut's BeanDefinition class</a>
+                    </li>
                 </ul>
-                <h4>
-                    Become a part of the VisRec community
-                </h4>
-                <p>
-                    The VisRec working group is always looking for anyone to help, test and develop features for the
-                    next versions of the API. Feedback is also always welcome. Visit
-                    <a href="https://groups.io/g/visrec">https://groups.io/g/visrec</a>
-                </p>
                 <hr />
-                <div class="clearfix end-box">
-                    <img src="../images/article-images/jsr-381-visual-recognition/image4.png">
-                    <p>
-                        Kevin Berendsen is software engineer at OpenValue, maintainer of JSR-381 and passionate about
-                        bringing Java and ML together.
-                    </p>
+                <div class="end-bio">
+                    <div>
+                        <img src="../images/article-images/serverless-java-applications/image-pva.jpg">
+                    </div>
+                    <div>
+                        <h1>
+                            Paulien van Alst
+                        </h1>
+                        <p>
+                            Paulien is a passionate software engineer in love with readable, reliable and testable
+                            code, independent on the language or technology used. At OpenValue she works on helping
+                            companies setting up better software. Lately, she is giving Kotlin workshops and
+                            presentations about migrating from Java to Kotlin. In her free time, she likes to sport,
+                            cycling and swimming in particular.
+                        </p>
+                    </div>
                 </div>
             </section>
         </div>
