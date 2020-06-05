@@ -2171,16 +2171,16 @@ input[type="checkbox"]:focus+label:before, input[type="radio"]:focus+label:befor
 
 /*edit+*/
 
-.image.fit figure {
-	margin: 2rem 0;
+figure.image.fit {
+	margin: 2.5rem 0;
 }
 
-.image.fit figure figcaption {
+.image.fit figcaption {
 	text-align: right;
 	font-size: 0.5em;
 }
 
-.image.fit figure a {
+.image.fit a {
 	border-bottom: none;
 }
 
@@ -2202,12 +2202,16 @@ input[type="checkbox"]:focus+label:before, input[type="radio"]:focus+label:befor
 
 /*edit+*/
 
-.image.main figure figcaption {
+figure.image.main {
+	margin: 4rem 0;
+}
+
+.image.main figcaption {
 	text-align: right;
 	font-size: 0.5em;
 }
 
-.image.main figure a {
+.image.main a {
 	border-bottom: none;
 }
 
@@ -2519,7 +2523,7 @@ header>h4+p {
 }
 
 header.major {
-	margin: 0;
+	margin: 0 0 4rem 0;
 	text-align: center;
 }
 
@@ -3461,9 +3465,8 @@ body.is-preload #intro:not(.hidden)+#header+#nav {
 	margin-left: 2rem;
 }
 
-#main>.post figure {
-	display: inline-block;
-	margin: 4rem 0 4rem 0;
+#main>.post figure.caption {
+	margin: 4rem 0;
 	text-align: center;
 	width: 100%;
 }
@@ -3479,7 +3482,6 @@ body.is-preload #intro:not(.hidden)+#header+#nav {
 #main>.post figure.caption figcaption {
 	text-align: center;
 	font-size: 0.5em;
-	padding: 0 15rem;
 }
 
 .left {

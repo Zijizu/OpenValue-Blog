@@ -5,11 +5,11 @@
     <title>OpenValue | Blog</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../../../assets/css/main.css">
     <noscript>
-        <link rel="stylesheet" href="../assets/css/noscript.css">
+        <link rel="stylesheet" href="../../../assets/css/noscript.css">
     </noscript>
-    <link rel="shortcut icon" type="image/png" href="../images/favicon.png">
+    <link rel="shortcut icon" type="image/png" href="../../../images/favicon.png">
 </head>
 
 <body class="is-preload">
@@ -19,18 +19,16 @@
         <header id="header">
             <div class="inner">
                 <div id="header-logo">
-                    <img src="../images/openvalue-white.png">
+                    <img src="../../../images/openvalue-white.png">
                 </div>
-                <!-- <p id="tagline">Better software, faster.</p> -->
             </div>
         </header>
         <!-- Nav -->
         <nav id="nav">
             <ul class="links">
                 <li class="active">
-                    <a href="../index.html">Home</a>
+                    <a href="../../../index.html">Home</a>
                 </li>
-                <!-- <li class="active"><a href="generic.html">Article</a></li> -->
             </ul>
             <ul class="icons">
                 <li>
@@ -43,8 +41,6 @@
                         <span class="label">YouTube</span>
                     </a>
                 </li>
-                <!-- <li><a href="mailto:info@openvalue.de" class="icon solid fa-envelope"><span
-							class="label">Email</span></a></li> -->
             </ul>
         </nav>
         <!-- Main -->
@@ -61,18 +57,12 @@
 
                     </p>
                 </header>
-                <div class="image main">
-                    <figure>
-                        <img src="../images/pic01.jpg" alt="">
-                        <figcaption>
-                            Image by
-                            <a href="https://pixabay.com/users/TayebMEZAHDIA-4194100/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3174729"
-                                target="_blank"> Tayeb MEZAHDIA </a>from
-                            <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3174729"
-                                target="_blank"> Pixabay</a>
-                        </figcaption>
-                    </figure>
-                </div>
+                <figure class="image main">
+                    <img src="../../../images/pic01.jpg" alt="">
+                    <figcaption>
+                        Image by Tayeb MEZAHDIA from Pixabay
+                    </figcaption>
+                </figure>
                 <h3>
                     Introduction
                 </h3>
@@ -80,9 +70,9 @@
                     When working on microservices in the Java ecosystem, especially using Spring (Boot), you will notice
                     the long start-up time that application will have, let alone the high memory consumption they will
                     have. The overhead of each single microservice will eventually take its costs on the system. Looking
-                    at a framework such as Micronaut could help out to reduce this overhead without loosing any
+                    at a framework such as Micronaut could help out to reduce this overhead without losing any
                     developer's productivity. Not only "classic" applications can be build using Micronaut, but also
-                    serverless applications, functions, can be build and deployed on a cloud environment or on
+                    serverless applications, functions, can be built and deployed on a cloud environment or on
                     Kubernetes using OpenFaaS. Let's dive into it!
                 </p>
                 <p>
@@ -125,7 +115,7 @@
                 <p>
                     For everything that has to do with Micronaut, a CLI (Command Line Interface) tool can be used. This
                     can be installed by simply following the steps in the official <a
-                        href="https://docs.micronaut.io/latest/guide/index.html#buildCLI">documentation</a>.
+                        href="https://docs.micronaut.io/latest/guide/index.html#buildCLI" target="_blank">documentation</a>.
                 </p>
                 <p>
                     The CLI tool is a good starting point for any project using Micronaut and will generate the backbone
@@ -349,7 +339,7 @@ mn create-function get-books-by-author --build=Maven --features=openfaas
                 </p>
                 <p>
                     Instructions for the installation are listed <a
-                        href="https://docs.openfaas.com/deployment/kubernetes/">here</a>.
+                        href="https://docs.openfaas.com/deployment/kubernetes/" target="_blank">here</a>.
                 </p>
                 <p>
                     In a nutshell, start with installing the CLI:
@@ -494,7 +484,7 @@ kubectl -n openfaas-fn get pods
                 <p>
                     Now this function has a running pod, but it is not running as such. The pod will be put up as a
                     placeholder for the function. Once a REST call is made to the endpoint, the application will be
-                    started. This is done with <a href="https://docs.openfaas.com/architecture/watchdog/">Watchdog</a>.
+                    started. This is done with <a href="https://docs.openfaas.com/architecture/watchdog/" target="_blank">Watchdog</a>.
                 </p>
                 <h2>
                     Resources
@@ -518,20 +508,20 @@ kubectl -n openfaas-fn get pods
                 </p>
                 <ul class="ul-text">
                     <li>
-                        <a href="http://www.micronaut.io">Official Micronaut documentation</a>
+                        <a href="http://www.micronaut.io" target="_blank">Official Micronaut documentation</a>
                     </li>
                     <li>
-                        <a href="https://www.openfaas.com/">Official OpenFaaS documentation</a>
+                        <a href="https://www.openfaas.com/" target="_blank">Official OpenFaaS documentation</a>
                     </li>
                     <li>
-                        <a href="https://docs.micronaut.io/latest/api/io/micronaut/inject/BeanDefinition.html">Java
+                        <a href="https://docs.micronaut.io/latest/api/io/micronaut/inject/BeanDefinition.html" target="_blank">Java
                             Documentation on Micronaut's BeanDefinition class</a>
                     </li>
                 </ul>
                 <hr />
                 <div class="end-bio">
                     <div>
-                        <img src="../images/article-images/serverless-java-applications/image-pva.jpg">
+                        <img src="../../../images/authors/image-pva.jpg">
                     </div>
                     <div>
                         <h1>
@@ -551,30 +541,11 @@ kubectl -n openfaas-fn get pods
         <!-- Footer -->
         <footer id="footer">
             <section class="split">
-                <!-- <form method="post" action="#">
-					<div class="fields">
-						<div class="field">
-							<label for="name">Name</label>
-							<input type="text" name="name" id="name" />
-						</div>
-						<div class="field">
-							<label for="email">Email</label>
-							<input type="text" name="email" id="email" />
-						</div>
-						<div class="field">
-							<label for="message">Message</label>
-							<textarea name="message" id="message" rows="3"></textarea>
-						</div>
-					</div>
-					<ul class="actions">
-						<li><input type="submit" value="Send Message" /></li>
-					</ul>
-				</form> -->
                 <section class="alt">
                     <div>
                         <h2>
                             <a href="https://openvalue.nl/">
-                                <img src="../images/nl.png" class="flag">Utrecht
+                                <img src="../../../images/nl.png" class="flag">Utrecht
                             </a>
                         </h2>
                         <p class="bold">
@@ -596,7 +567,7 @@ kubectl -n openfaas-fn get pods
                     <div>
                         <h2>
                             <a href="https://openvalue.nl/">
-                                <img src="../images/nl.png" class="flag">Rotterdam
+                                <img src="../../../images/nl.png" class="flag">Rotterdam
                             </a>
                         </h2>
                         <p class="bold">
@@ -620,7 +591,7 @@ kubectl -n openfaas-fn get pods
                     <div>
                         <h2>
                             <a href="https://openvalue.de/">
-                                <img src="../images/de.png" class="flag">Munich
+                                <img src="../../../images/de.png" class="flag">Munich
                             </a>
                         </h2>
                         <p class="bold">
@@ -636,17 +607,13 @@ kubectl -n openfaas-fn get pods
                                 info@openvalue.de
                             </a>
                         </p>
-                        <!-- <h3>Email</h3>
-					<p><a href="mailto:info@openvalue.de">info@openvalue.de</a></p>
-							 <h3>Phone</h3>
-					<p><a href="tel:+498945214739">+49 89 4521 4739</a></p> -->
                     </div>
                 </section>
                 <section class="alt">
                     <div>
                         <h2>
                             <a href="https://openvalue.at/">
-                                <img src="../images/at.png" class="flag">Vienna
+                                <img src="../../../images/at.png" class="flag">Vienna
                             </a>
                         </h2>
                         <p class="bold">
@@ -666,16 +633,6 @@ kubectl -n openfaas-fn get pods
                         </p>
                     </div>
                 </section>
-                <!--<section>
-					<h3>Social</h3>
-					<ul class="icons alt">
-						<li><a href="https://twitter.com/OpenValue" class="icon brands alt fa-twitter"><span
-									class="label">Twitter</span></a></li>
-						<li><a href="https://talks.openvalue.tech/" class="icon brands alt fa-youtube"><span
-									class="label">YouTube</span></a>
-						</li>
-					</ul>
-				</section>-->
             </section>
         </footer>
         <!-- Copyright -->
@@ -683,22 +640,22 @@ kubectl -n openfaas-fn get pods
             <ul>
                 <li>&copy; <a href="https://www.openvalue.group/" target="_blank">OpenValue</a></li>
                 <li>
-                    <a href="https://openvalue.de/privacy.html" target="_blank">Privacy</a>
+                    <a href="../../../privacy.html" target="_blank">Privacy</a>
                 </li>
                 <li>
-                    <a href="https://openvalue.de/imprint.html" target="_blank">Imprint</a>
+                    <a href="../../../imprint.html" target="_blank">Imprint</a>
                 </li>
             </ul>
         </div>
     </div>
     <!-- Scripts -->
-    <script src="../assets/js/jquery.min.js"></script>
-    <script src="../assets/js/jquery.scrollex.min.js"></script>
-    <script src="../assets/js/jquery.scrolly.min.js"></script>
-    <script src="../assets/js/browser.min.js"></script>
-    <script src="../assets/js/breakpoints.min.js"></script>
-    <script src="../assets/js/util.js"></script>
-    <script src="../assets/js/main.js"></script>
+    <script src="../../../assets/js/jquery.min.js"></script>
+    <script src="../../../assets/js/jquery.scrollex.min.js"></script>
+    <script src="../../../assets/js/jquery.scrolly.min.js"></script>
+    <script src="../../../assets/js/browser.min.js"></script>
+    <script src="../../../assets/js/breakpoints.min.js"></script>
+    <script src="../../../assets/js/util.js"></script>
+    <script src="../../../assets/js/main.js"></script>
 </body>
 
 </html>

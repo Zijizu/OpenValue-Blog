@@ -32,24 +32,16 @@
             </ul>
         </div>
 
-        <!-- Header -->
-        <!-- <header id="header">
-			<a href="index.html" class="logo">OpenValue | Blog</a>
-		</header> -->
-
         <!-- Nav -->
         <nav id="nav">
             <ul class="links">
-                <li class="active"><a href="index.html">OpenValue | Blog</a></li>
-                <!-- <li><a href="https://openvalue.de/">OpenValue Website</a></li> -->
+                <li class="active"><a href="#posts" class="scrolly">OpenValue | Blog</a></li>
             </ul>
             <ul class="icons">
                 <li><a href="https://twitter.com/OpenValue" target="_blank" class="icon brands fa-twitter"><span
                             class="label">Twitter</span></a></li>
                 <li><a href="https://talks.openvalue.tech/" target="_blank" class="icon brands fa-youtube"><span
                             class="label">YouTube</span></a></li>
-                <!-- <li><a href="mailto:info@openvalue.de" class="icon solid fa-envelope"><span
-							class="label">Email</span></a></li> -->
             </ul>
         </nav>
 
@@ -60,25 +52,17 @@
             <article class="post featured">
                 <header class="major">
                     <span class="date">May 28, 2020</span>
-                    <h1><a href="articles/serverless-java-applications.html">Building serverless Java<br />
+                    <h1><a href="articles/2020/05/serverless-java-applications.html">Building serverless Java<br />
                             applications using<br />
                             Micronaut and OpenFaaS</a></h1>
                 </header>
-                <!--<a href="articles/serverless-java-applications.html" class="image main"><img src="images/pic01.jpg"
-                        alt="" /></a>-->
-                <div class="image main">
-                    <figure>
-                        <a href="articles/serverless-java-applications.html" class="image main"><img
-                                src="images/pic01.jpg" alt="" /></a>
-                        <figcaption>
-                            Image by
-                            <a href="https://pixabay.com/users/TayebMEZAHDIA-4194100/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3174729"
-                                target="_blank"> Tayeb MEZAHDIA </a>from
-                            <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3174729"
-                                target="_blank"> Pixabay</a>
-                        </figcaption>
-                    </figure>
-                </div>
+                <figure class="image main">
+                    <a href="articles/2020/05/serverless-java-applications.html" class="image main"><img
+                            src="images/pic01.jpg" alt="" /></a>
+                    <figcaption>
+                        Image by Tayeb MEZAHDIA from Pixabay
+                    </figcaption>
+                </figure>
                 <p>
                     When working on microservices in the Java ecosystem, especially using Spring (Boot), you will notice
                     the long start-up time that application will have, let alone the high memory consumption they will
@@ -88,151 +72,65 @@
                     serverless applications, functions, can be build and deployed on a cloud environment or on
                     Kubernetes using OpenFaaS. Let's dive into it!
                 </p>
-                <span class="name">by <a>Paulien van Alst</a> | <a>OpenValue Utrecht</a></span>
+                <span class="name">by Paulien van Alst | OpenValue Utrecht</span>
                 <ul class="actions special">
-                    <li><a href="articles/serverless-java-applications.html" class="button large">Read More</a></li>
+                    <li><a href="articles/2020/05/serverless-java-applications.html" class="button large">Read More</a>
+                    </li>
                 </ul>
             </article>
 
             <!-- Posts -->
-            <section class="posts">
+            <section id="posts" class="posts">
                 <article>
                     <header>
                         <span class="date">May 20, 2020</span>
-                        <h2><a href="articles/jsr-381-visual-recognition.html">JSR-381: A Standard Java API<br />for
+                        <h2><a href="articles/2020/05/jsr-381-visual-recognition.html">JSR-381: A Standard Java
+                                API<br />for
                                 Visual Recognition<br />
                                 using Machine Learning</a></h2>
                     </header>
-                    <!--<a href="articles/jsr-381-visual-recognition.html" class="image fit"><img src="images/pic02.jpg"
-                            alt="" /></a>-->
-                    <div class="image fit">
-                        <figure>
-                            <a href="articles/jsr-381-visual-recognition.html" class="image fit"><img
-                                    src="images/pic02.jpg" alt="" /></a>
-                            <figcaption>
-                                Image by
-                                <a href="https://pixabay.com/users/TheDigitalArtist-202249/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4063134"
-                                    target="_blank"> Pete Linforth </a>from
-                                <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4063134"
-                                    target="_blank"> Pixabay</a>
-                            </figcaption>
-                        </figure>
-                    </div>
-                    <p>
-                        At this point, most of us know Machine Learning (ML) as recognizing patterns in your data,
-                        anticipating the likely future behavior of similar data and taking steps to maximize benefits
-                        based on those predictions. It represents a massive change in how we solve problems and has
-                        long-term effects to the very foundations of computing and to the world in general.
-                    </p>
-                    <p>
-                        Most ML toolkits require you to learn Python. Python is one of the leading programming languages
-                        in
-                        data science and ML. But there are 10 million Java developers on the planet that need to build
-                        world-class production ML applications that leverage our years of expertise in development and
-                        deployment.
-                    </p>
+                    <figure class="image fit">
+                        <a href="articles/2020/05/jsr-381-visual-recognition.html" class="image fit"><img
+                                src="images/pic02.jpg" alt="" /></a>
+                        <figcaption>
+                            Image by Pete Linforth from Pixabay
+                        </figcaption>
+                    </figure>
                     <p>
                         This article will cover a deep learning introduction and create a ML model that will be able to
                         classify Star Wars aircrafts in just a few lines of code using Java Specification Request
-                        #JSR-381 (“JSR-381”).
+                        #JSR-381 (“JSR-381”).<br /><br />
                     </p>
-                    <span class="name">by <a>Kevin Berensen</a> | <a>OpenValue Utrecht</a></span>
+                    <span class="name">by Kevin Berensen | OpenValue Utrecht</span>
                     <ul class="actions special">
-                        <li><a href="articles/jsr-381-visual-recognition.html" class="button">Read More</a></li>
+                        <li><a href="articles/2020/05/jsr-381-visual-recognition.html" class="button">Read More</a></li>
                     </ul>
                 </article>
                 <article>
                     <header>
-                        <span class="date">April 22, 2020</span>
-                        <h2><a href="#">Primis eget<br />
-                                imperdiet cursus ligula<br />
-                                et elementum</a></h2>
+                        <span class="date">May 08, 2020</span>
+                        <h2><a href="articles/2020/05/50-tech-talks-at-19-conferences.html">
+                                Why we gave 50+ tech talks<br />
+                                at 19 conferences<br /><br /></a></h2>
                     </header>
-                    <!--<a href="#" class="image fit"><img src="images/pic03.jpg" alt="" /></a>-->
-                    <div class="image fit">
-                        <figure>
-                            <a href="#" class="image fit"><img src="images/pic03.jpg" alt="" /></a>
-                            <figcaption>
-                                Image by
-                                <a href="https://pixabay.com/users/bsdrouin-5016447/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2402637"
-                                    target="_blank"> Bethany Drouin </a>from
-                                <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2402637"
-                                    target="_blank"> Pixabay</a>
-                            </figcaption>
-                        </figure>
-                    </div>
+                    <figure class="image fit">
+                        <a href="articles/2020/05/50-tech-talks-at-19-conferences.html" class="image fit"><img
+                                src="images/pic03.jpg" alt="" /></a>
+                        <figcaption>
+                            Photo by Miguel Henriques on Unsplash
+                        </figcaption>
+                    </figure>
                     <p>
-                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
-                        ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
-                        dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
-                        sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                        invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                        We started OpenValue almost 2 years ago. One of the key values of our company is sharing
+                        knowledge. Next to fun and craftsmanship. This all comes together with our activities in the
+                        international Java community. I’ll explain why.
                     </p>
-                    <p> Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel
-                        illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui
-                        blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-                    </p>
-                    <p>
-                        Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut
-                        aliquip ex ea commodo consequat.
-                    </p>
-                    <span class="name">by <a>Lorem Ipsum</a> | <a>OpenValue Lorem</a></span>
+                    <span class="name">by Roy Wasse | OpenValue Utrecht</span>
                     <ul class="actions special">
-                        <li><a href="#" class="button">Read More</a></li>
+                        <li><a href="articles/2020/05/50-tech-talks-at-19-conferences.html" class="button">Read More</a>
+                        </li>
                     </ul>
                 </article>
-                <!--<article>
-                    <header>
-                        <span class="date">April 18, 2017</span>
-                        <h2><a href="#">Ante mattis<br />
-                                interdum dolor</a></h2>
-                    </header>
-                    <a href="#" class="image fit"><img src="images/pic04.jpg" alt="" /></a>
-                    <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque
-                        venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
-                    <ul class="actions special">
-                        <li><a href="#" class="button">Read More</a></li>
-                    </ul>
-                </article>
-                <article>
-                    <header>
-                        <span class="date">April 14, 2017</span>
-                        <h2><a href="#">Tempus sed<br />
-                                nulla imperdiet</a></h2>
-                    </header>
-                    <a href="#" class="image fit"><img src="images/pic05.jpg" alt="" /></a>
-                    <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque
-                        venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
-                    <ul class="actions special">
-                        <li><a href="#" class="button">Read More</a></li>
-                    </ul>
-                </article>
-                <article>
-                    <header>
-                        <span class="date">April 11, 2017</span>
-                        <h2><a href="#">Odio magna<br />
-                                sed consectetur</a></h2>
-                    </header>
-                    <a href="#" class="image fit"><img src="images/pic06.jpg" alt="" /></a>
-                    <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque
-                        venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
-                    <ul class="actions special">
-                        <li><a href="#" class="button">Read More</a></li>
-                    </ul>
-                </article>
-                <article>
-                    <header>
-                        <span class="date">April 7, 2017</span>
-                        <h2><a href="#">Augue lorem<br />
-                                primis vestibulum</a></h2>
-                    </header>
-                    <a href="#" class="image fit"><img src="images/pic07.jpg" alt="" /></a>
-                    <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque
-                        venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
-                    <ul class="actions special">
-                        <li><a href="#" class="button">Read More</a></li>
-                    </ul>
-                </article>-->
             </section>
 
             <!-- Footer -->
@@ -255,25 +153,6 @@
         <!-- Footer -->
         <footer id="footer">
             <section class="split">
-                <!-- <form method="post" action="#">
-					<div class="fields">
-						<div class="field">
-							<label for="name">Name</label>
-							<input type="text" name="name" id="name" />
-						</div>
-						<div class="field">
-							<label for="email">Email</label>
-							<input type="text" name="email" id="email" />
-						</div>
-						<div class="field">
-							<label for="message">Message</label>
-							<textarea name="message" id="message" rows="3"></textarea>
-						</div>
-					</div>
-					<ul class="actions">
-						<li><input type="submit" value="Send Message" /></li>
-					</ul>
-				</form> -->
                 <section class="alt">
                     <div>
                         <h2>
@@ -319,10 +198,6 @@
                         <p><a href="tel:+498945214739" class="icon solid fa-phone"> +49 89 4521 4739</a></p>
                         <p><a href="mailto:info@openvalue.de" class="icon regular fa-envelope">
                                 info@openvalue.de</a></p>
-                        <!-- <h3>Email</h3>
-					<p><a href="mailto:info@openvalue.de">info@openvalue.de</a></p>
-							 <h3>Phone</h3>
-					<p><a href="tel:+498945214739">+49 89 4521 4739</a></p> -->
                     </div>
                 </section>
                 <section class="alt">
@@ -344,16 +219,6 @@
                                 info@openvalue.at</a></p>
                     </div>
                 </section>
-                <!--<section>
-					<h3>Social</h3>
-					<ul class="icons alt">
-						<li><a href="https://twitter.com/OpenValue" class="icon brands alt fa-twitter"><span
-									class="label">Twitter</span></a></li>
-						<li><a href="https://talks.openvalue.tech/" class="icon brands alt fa-youtube"><span
-									class="label">YouTube</span></a>
-						</li>
-					</ul>
-				</section>-->
             </section>
         </footer>
 
@@ -362,10 +227,10 @@
             <ul>
                 <li>&copy; <a href="https://www.openvalue.group/" target="_blank">OpenValue</a></li>
                 <li>
-                    <a href="https://openvalue.de/privacy.html" target="_blank">Privacy</a>
+                    <a href="privacy.html" target="_blank">Privacy</a>
                 </li>
                 <li>
-                    <a href="https://openvalue.de/imprint.html" target="_blank">Imprint</a>
+                    <a href="imprint.html" target="_blank">Imprint</a>
                 </li>
             </ul>
         </div>
