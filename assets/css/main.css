@@ -2165,9 +2165,26 @@ input[type="checkbox"]:focus+label:before, input[type="radio"]:focus+label:befor
 
 .image.fit {
 	display: block;
-	margin: 2.5rem 0;
+	margin: 0;
 	width: 100%;
 }
+
+/*edit+*/
+
+.image.fit figure {
+	margin: 2rem 0;
+}
+
+.image.fit figure figcaption {
+	text-align: right;
+	font-size: 0.5em;
+}
+
+.image.fit figure a {
+	border-bottom: none;
+}
+
+/*edit-*/
 
 .image.fit:first-child {
 	margin-top: 0;
@@ -2179,12 +2196,14 @@ input[type="checkbox"]:focus+label:before, input[type="radio"]:focus+label:befor
 
 .image.main {
 	display: block;
-	margin: 4rem 0;
+	margin: 0;
 	width: 100%;
 }
 
+/*edit+*/
+
 .image.main figure figcaption {
-	text-align: center;
+	text-align: right;
 	font-size: 0.5em;
 }
 
@@ -2192,8 +2211,11 @@ input[type="checkbox"]:focus+label:before, input[type="radio"]:focus+label:befor
 	border-bottom: none;
 }
 
+/*edit-*/
+
 .image.main:first-child {
 	margin-top: 0;
+	margin-bottom: 0;
 }
 
 .image.main img {
@@ -2497,7 +2519,7 @@ header>h4+p {
 }
 
 header.major {
-	margin: 0 0 4rem 0;
+	margin: 0;
 	text-align: center;
 }
 
@@ -2566,7 +2588,7 @@ article.post.featured>.name:after {
 
 @media screen and (max-width: 736px) {
 	header.major {
-		margin: 0 0 2rem 0;
+		margin: 0;
 	}
 }
 
@@ -2979,7 +3001,7 @@ body.is-preload #wrapper.fade-in:before {
 	text-transform: uppercase;
 }
 
-/*edit*/
+/*edit+*/
 
 #header p {
 	font-size: 1.35rem;
@@ -2988,6 +3010,13 @@ body.is-preload #wrapper.fade-in:before {
 	letter-spacing: 0.225em;
 	text-transform: none;
 }
+
+#intro p.tagline {
+	font-family: "Open Sans", Helvetica, sans-serif;
+	font-size: 1.4rem;
+}
+
+/*edit-*/
 
 #intro+#header {
 	margin-top: -20rem;
@@ -3077,8 +3106,9 @@ body.is-preload #intro:not(.hidden)+#header+#nav {
 	#header-logo {
 		width: 80vw;
 	}
-	#intro p#tagline {
+	#intro p.tagline {
 		font-size: 0.9em;
+		font-family: "Open Sans", Helvetica, sans-serif;
 	}
 	/*edit*/
 	#header p#tagline {
@@ -3457,6 +3487,7 @@ body.is-preload #intro:not(.hidden)+#header+#nav {
 	width: 25rem;
 	margin: 2rem 3rem 0 0;
 }
+
 p.left {
 	text-align: center;
 }
