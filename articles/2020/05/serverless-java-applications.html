@@ -71,7 +71,7 @@
                     the long start-up time that application will have, let alone the high memory consumption they will
                     have. The overhead of each single microservice will eventually take its costs on the system. Looking
                     at a framework such as Micronaut could help out to reduce this overhead without losing any
-                    developer's productivity. Not only "classic" applications can be build using Micronaut, but also
+                    developer's productivity. Not only "classic" applications can be built using Micronaut, but also
                     serverless applications, functions, can be built and deployed on a cloud environment or on
                     Kubernetes using OpenFaaS. Let's dive into it!
                 </p>
@@ -87,7 +87,7 @@
                     Micronaut project, you won't be surprised at first sight, it will even look and feel the same as the
                     common Spring (Boot) projects in the Java world.
                     <br />
-                    However the differences are far to be small or subtle and should be very well understood before
+                    However, the differences are far to be small or subtle and should be very well understood before
                     start taking such projects into production. On the other hand, starting discovering the Micronaut
                     world will go very smoothly and the understanding will grow along as you are hacking your way
                     through it.
@@ -172,7 +172,7 @@ mn create-app bookstore-service --build=Maven --lang=java --features=Kubernetes,
                 </p>
                 <p>
                     As the application will be deployed on Kubernetes as indicated with the feature `Kubernetes`, the
-                    `create-app` command will also generate a `k8s.yml` which will serve as a basis for the deployment.
+                    `create-app` command will also generate a `k8s.yml`, which will serve as a basis for the deployment.
                     Of course this will have to be adjusted to the requirements of the environment where it will be
                     deployed to. This Kubernetes configuration will have a deployment and a service.
                 </p>
@@ -245,7 +245,7 @@ public class Book implements Serializable {
                     Building a function
                 </h4>
                 <p>
-                    A function will be build to serve data that needs to be served quickly to our application without
+                    A function will be built to serve data that needs to be served quickly to our application without
                     using a lot of logic. In our example, the function will be returning a list of books given an
                     author's name. Let's start with the most simple case:
                 </p>
