@@ -9,7 +9,7 @@
 	var	$window = $(window),
 		$body = $('body'),
 		$wrapper = $('#wrapper'),
-		$header = $('#header'),
+		$header = $('#header,#intro'),
 		$nav = $('#nav'),
 		$main = $('#main'),
 		$navPanelToggle, $navPanel, $navPanelInner;
