@@ -2964,6 +2964,12 @@ body.is-preload #wrapper.fade-in:before {
 	background-color: #6289C3;
 }
 
+/*edit*/
+
+#intro .first.icon {
+	font-size: 3rem;
+}
+
 /*#intro h1 {
 			font-size: 4.5rem;
 			line-height: 1;
