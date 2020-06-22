@@ -157,8 +157,7 @@
                     will therefore be a http-server as well as a http-client and will be deployed on Kubernetes.<br />
                     Therefore the command to generate the basis of the application will be:
                 </p>
-                <pre><code>
-    bash
+                <pre><code> <!--class="bash"-->
     mn create-app bookstore-service --build=Maven --lang=java --features=Kubernetes,netflix-hystrix,http-server,http-client
                 </code></pre>
                 <p>
@@ -178,7 +177,7 @@
                     By default, such an application will be running on port 8080. To change that the following property
                     in the application.yml can be set to the preferred value:
                 </p>
-                <pre><code>
+                <pre><code> <!--class="yaml"-->
     micronaut:
         server:
             port: 8081
@@ -187,7 +186,7 @@
                     Now it's time to add an endpoint to retrieve all the books given a certain author. For that, the
                     HTTP functionality of Micronaut will be used.
                 </p>
-                <pre><code>
+                <pre><code> <!--class="java"-->
     package bookstore.service.store;
 
     import io.Micronaut.http.annotation.Controller;
@@ -211,8 +210,7 @@
                 <p>
                     Remarkable here is the implementation of the <code>Book</code> DTO:
                 </p>
-                <pre><code>
-    java
+                <pre><code> <!--class="java"-->
     @Introspected
     public class Book implements Serializable {
 
@@ -242,8 +240,7 @@
                     using a lot of logic. In our example, the function will be returning a list of books given an
                     author's name. Let's start with the most simple case:
                 </p>
-                <pre><code>
-    bash
+                <pre><code> <!--class="bash"-->
     mn create-function get-books-by-author --build=Maven --features=openfaas
                 </code></pre>
                 <p>
@@ -255,8 +252,7 @@
                     functionality will be used and it will return class path errors):<br />
                     At the time of writing this was still generated for a function running on OpenFaaS.
                 </p>
-                <pre><code>
-    xml
+                <pre><code> <!--class="xml"-->
     &lt;dependency&gt;
         &lt;groupId&gt;com.amazonaws&lt;/groupId&gt;
         &lt;artifactId&gt;aws-lambda-java-log4j2&lt;/artifactId&gt;
@@ -292,8 +288,7 @@
                 <p>
                     Also the following must be added for the logging in the shade jar:
                 </p>
-                <pre><code>
-    xml
+                <pre><code> <!--class="xml"-->
     &lt;transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"&gt;
         &lt;mainClass&gt;${exec.mainClass}&lt;/mainClass&gt;
         &lt;manifestEntries&gt;
@@ -339,23 +334,20 @@
                 <p>
                     In a nutshell, start with installing the CLI:
                 </p>
-                <pre><code>
-    bash
+                <pre><code> <!--class="bash"-->
     brew install faas-cli
                 </code></pre>
                 <p>
                     Then before installing OpenFaaS, install Arkade (which will be fastest option to install OpenFaaS
                     later on):
                 </p>
-                <pre><code>
-    bash
+                <pre><code> <!--class="bash"-->
     curl -SLsf https://dl.get-arkade.dev/ | sudo sh
                 </code></pre>
                 <p>
                     Now you can finally install OpenFaaS on your local Kubernetes cluster:
                 </p>
-                <pre><code>
-    bash
+                <pre><code> <!--class="bash"-->
     arkade install openfaas
                 </code></pre>
                 <p>
@@ -363,14 +355,13 @@
                     there are some useful instructions there that will help you finish the installation. To start with
                     checking whether all the deployments where successful:
                 </p>
-                <pre><code>
-    bash
+                <pre><code> <!--class="bash"-->
     kubectl -n openfaas get deployments -l "release=openfaas, app=openfaas"
                 </code></pre>
                 <p>
                     The successful deployments should be:
                 </p>
-                <pre><code>
+                <pre><code> <!--class="?"-->
     NAME                READY   UP-TO-DATE   AVAILABLE   AGE
 
     alertmanager        1/1     1            1           6d21h
@@ -390,16 +381,14 @@
                 <p>
                     Now one final step has to be taken. The Gateway used by OpenFaaS should be forwarded:
                 </p>
-                <pre><code>
-    bash
+                <pre><code> <!--class="bash"-->
     kubectl -n openfaas rollout status deploy/gateway
     kubectl -n openfaas port-foward svc/gateway 8080:8080
                 </code></pre>
                 <p>
                     Do not forget setup the login:
                 </p>
-                <pre><code>
-    bash
+                <pre><code> <!--class="bash"-->
     PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath="{.data.basic-auth-password}" | base64 --decode; echo)
     echo -n $PASSWORD | faas-cli login --username admin --password-stdin
                 </code></pre>
@@ -416,8 +405,7 @@
                     OpenFaaS requires a registry to push and deploy the function. For local development, the registry
                     could be started within a docker container:
                 </p>
-                <pre><code>
-    bash
+                <pre><code> <!--class="bash"-->
     sudo docker run -d -p 5000:5000 --name registry registry:2
                 </code></pre>
                 <p>
@@ -425,8 +413,7 @@
                     only specify the endpoint of the gateway), the function is described as a docker image that would
                     have to be ran:
                 </p>
-                <pre><code>
-    yaml
+                <pre><code> <!--class="yaml"-->
     provider:
         name: openfaas
         gateway: http://127.0.0.1:8080
@@ -443,8 +430,7 @@
                 <p>
                     Now let's use the magical commands of the <code>faas-cli</code> to deploy and run the function:
                 </p>
-                <pre><code>
-    bash
+                <pre><code> <!--class="bash"-->
     faas-cli build -f function.yml
     faas-cli push -f function.yml
     faas-cli deploy -f function.yml
@@ -452,15 +438,13 @@
                 <p>
                     Now call the function through the OpenFaaS Gateway:
                 </p>
-                <pre><code>
-    bash
+                <pre><code> <!--class="bash"-->
     curl -X GET http://127.0.0.1:8080/function/get-books-by-author -H 'Content-Type: application/json' -d $'{"name":"Piet"}'
                 </code></pre>
                 <p>
                     To verify that the function is running:
                 </p>
-                <pre><code>
-    bash
+                <pre><code> <!--class="bash"-->
     kubectl -n openfaas-fn get pods
                 </code></pre>
                 <p>
