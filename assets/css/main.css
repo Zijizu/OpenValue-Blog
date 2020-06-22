@@ -3027,7 +3027,13 @@ body.is-preload #wrapper.fade-in:before {
 /*edit-*/
 
 #intro+#header {
-	margin-top: /*-20rem*/ 0rem;
+	margin-top: -20rem;
+}
+
+/*edit*/
+
+#intro+#header.header-home {
+	margin-top: 0rem;
 }
 
 #intro+#header .logo {
@@ -3087,7 +3093,11 @@ body.is-preload #intro:not(.hidden)+#header+#nav {
 		display: none;
 	}
 	#intro+#header {
-		margin-top: /*-14rem*/ 0rem;
+		margin-top: -14rem;
+	}
+	/*edit*/
+	#intro+#header.header-home {
+		margin-top: 0rem;
 	}
 }
 
@@ -3167,11 +3177,18 @@ body.is-preload #intro:not(.hidden)+#header+#nav {
 	-webkit-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-	height: /*20rem*/ 0rem;
-	padding-bottom: /*8rem*/ 0rem;
+	height: 20rem;
+	padding-bottom: 8rem;
 	position: relative;
 	text-align: center;
 	z-index: 2;
+}
+
+/*edit*/
+
+#header.header-home {
+	height: 0rem;
+	padding-bottom: 0rem;
 }
 
 #header input, #header select, #header textarea {
@@ -3235,14 +3252,23 @@ body.is-preload #intro:not(.hidden)+#header+#nav {
 
 @media screen and (max-width: 980px) {
 	#header {
-		height: /*14rem*/ 0rem;
-		padding-bottom: /*4rem*/ 0rem;
+		height: 14rem;
+		padding-bottom: 4rem;
+	}
+	/*edit*/
+	#header.header-home {
+		height: 0rem;
+		padding-bottom: 0rem;
 	}
 }
 
 @media screen and (max-width: 736px) {
 	#header {
 		padding-bottom: 3rem;
+	}
+	/*edit*/
+	#header.header-home {
+		padding-bottom: 0rem;
 	}
 	#header .logo {
 		font-size: 1.58rem;
