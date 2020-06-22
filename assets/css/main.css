@@ -3512,6 +3512,7 @@ body.is-preload #intro:not(.hidden)+#header+#nav {
 	width: 25rem;
 	margin: 0;
 	width: 50%;
+	margin: 0 0 2rem 0;
 }
 
 p.left {
