@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+
 <html>
 
 <head>
@@ -9,12 +10,15 @@
     <noscript>
         <link rel="stylesheet" href="../../../assets/css/noscript.css">
     </noscript>
+    <link rel="stylesheet" href="../../../assets/css/atom-one-light.css">
     <link rel="shortcut icon" type="image/png" href="../../../images/favicon.png">
 </head>
 
 <body class="is-preload">
+
     <!-- Wrapper -->
     <div id="wrapper">
+
         <!-- Header -->
         <header id="header">
             <div class="inner">
@@ -23,6 +27,7 @@
                 </div>
             </div>
         </header>
+
         <!-- Nav -->
         <nav id="nav">
             <ul class="links">
@@ -33,35 +38,31 @@
             <ul class="icons">
                 <li>
                     <a href="https://twitter.com/OpenValue" target="_blank" class="icon brands fa-twitter">
-                        <span class="label">Twitter</span>
-                    </a>
+                        <span class="label">Twitter</span></a>
                 </li>
                 <li>
                     <a href="https://talks.openvalue.tech/" target="_blank" class="icon brands fa-youtube">
-                        <span class="label">YouTube</span>
-                    </a>
+                        <span class="label">YouTube</span></a>
                 </li>
             </ul>
         </nav>
+
         <!-- Main -->
         <div id="main">
+
             <!-- Post -->
             <section class="post">
                 <header class="major">
                     <span class="date">June 04, 2020</span>
-                    <h1>Building serverless Java<br />
+                    <h1>
+                        Building serverless Java<br />
                         applications using<br />
                         Micronaut and OpenFaaS
                     </h1>
-                    <p>
-
-                    </p>
                 </header>
                 <figure class="image main">
                     <img src="../../../images/pic01.jpg" alt="">
-                    <figcaption>
-                        Image by Tayeb MEZAHDIA from Pixabay
-                    </figcaption>
+                    <figcaption>Image by Tayeb MEZAHDIA from Pixabay</figcaption>
                 </figure>
                 <h3>
                     Introduction
@@ -85,8 +86,7 @@
                 <p>
                     Micronaut is a JVM based framework designed for building modular microservices. When you open a
                     Micronaut project, you won't be surprised at first sight, it will even look and feel the same as the
-                    common Spring (Boot) projects in the Java world.
-                    <br />
+                    common Spring (Boot) projects in the Java world.<br />
                     However, the differences are far to be small or subtle and should be very well understood before
                     start taking such projects into production. On the other hand, starting discovering the Micronaut
                     world will go very smoothly and the understanding will grow along as you are hacking your way
@@ -98,11 +98,9 @@
                 <p>
                     Where Spring is known to use a lot of reflection during runtime, Micronaut is doing the same work
                     but compile time. One example is the Spring data queries, that are generated runtime. Micronaut will
-                    generate those same queries compile time minimizing the used memory at runtime.
-                    <br />
+                    generate those same queries compile time minimizing the used memory at runtime.<br />
                     Each Bean created will be enriched compile time creating a so-called <code>BeanDefinition</code>
-                    class
-                    containing the bean's requirement and it's constructor. All these classes are processed using
+                    class containing the bean's requirement and it's constructor. All these classes are processed using
                     the <code>BeanDefinitionInjectProcessor</code>.
                 </p>
                 <p>
@@ -116,16 +114,14 @@
                 </h3>
                 <p>
                     For everything that has to do with Micronaut, a CLI (Command Line Interface) tool can be used. This
-                    can be installed by simply following the steps in the official <a
-                        href="https://docs.micronaut.io/latest/guide/index.html#buildCLI"
-                        target="_blank">documentation</a>.
+                    can be installed by simply following the steps in the official
+                    <a href="https://docs.micronaut.io/latest/guide/index.html#buildCLI" target="_blank">documentation</a>.
                 </p>
                 <p>
                     The CLI tool is a good starting point for any project using Micronaut and will generate the backbone
                     structure of the project and some useful files for development. It does the entire scaffolding for
                     you. For each application type a list of features can be set up to generate all the necessary
-                    configuration needed for those features.
-                    <br />
+                    configuration needed for those features.<br />
                     The CLI tool supports three JVM languages: Java, Kotlin and Groovy and two build tools: Maven and
                     Gradle. In case of a Maven project a Maven wrapper will be generated as well as a pom.xml.
                 </p>
@@ -137,8 +133,7 @@
                 <p>
                     Coming from the Spring world, you won't be surprised to find the following in the main/resources
                     directory: an <code>application.yml</code>. This file contains, just as it will in a Spring
-                    application, all
-                    the configuration settings for the application.
+                    application, all the configuration settings for the application.
                 </p>
                 <h3>
                     Let's start
@@ -147,8 +142,7 @@
                     During this article, we will be building the following application:
                 </p>
                 <figure class="caption">
-                    <img class="image50"
-                        src="../../../images/article-images/serverless-java-applications/bookstore-arch.png">
+                    <img class="image40" src="../../../images/article-images/serverless-java-applications/bookstore-arch.png">
                 </figure>
                 <p>
                     A simple application will serve a book given an author. To do so, it will call a function that
@@ -160,13 +154,12 @@
                 <p>
                     In this example, the application will contain a REST endpoint to ask for a book of a particular
                     author. This endpoint will have to a call a function to retrieve this information. This application
-                    will therefore be a http-server as well as a http-client and will be deployed on Kubernetes.
-                    <br />
+                    will therefore be a http-server as well as a http-client and will be deployed on Kubernetes.<br />
                     Therefore the command to generate the basis of the application will be:
                 </p>
                 <pre><code>
-bash
-mn create-app bookstore-service --build=Maven --lang=java --features=Kubernetes,netflix-hystrix,http-server,http-client
+    bash
+    mn create-app bookstore-service --build=Maven --lang=java --features=Kubernetes,netflix-hystrix,http-server,http-client
                 </code></pre>
                 <p>
                     Because the service calls a function, netflix-hystrix is needed. A function needs some time to
@@ -176,44 +169,40 @@ mn create-app bookstore-service --build=Maven --lang=java --features=Kubernetes,
                     available.
                 </p>
                 <p>
-                    As the application will be deployed on Kubernetes as indicated with the feature
-                    <code>Kubernetes</code>, the
-                    <code>create-app</code> command will also generate a <code>k8s.yml</code>, which will serve as a
-                    basis for the deployment.
-                    Of course this will have to be adjusted to the requirements of the environment where it will be
-                    deployed to. This Kubernetes configuration will have a deployment and a service.
+                    As the application will be deployed on Kubernetes as indicated with the feature <code>Kubernetes</code>,
+                    the <code>create-app</code> command will also generate a <code>k8s.yml</code>, which will serve as a
+                    basis for the deployment. Of course this will have to be adjusted to the requirements of the environment
+                    where it will be deployed to. This Kubernetes configuration will have a deployment and a service.
                 </p>
                 <p>
                     By default, such an application will be running on port 8080. To change that the following property
                     in the application.yml can be set to the preferred value:
                 </p>
                 <pre><code>
-yaml
-micronaut:
-    server:
-        port: 8081
+    micronaut:
+        server:
+            port: 8081
                 </code></pre>
                 <p>
                     Now it's time to add an endpoint to retrieve all the books given a certain author. For that, the
                     HTTP functionality of Micronaut will be used.
                 </p>
                 <pre><code>
-java
-package bookstore.service.store;
+    package bookstore.service.store;
 
-import io.Micronaut.http.annotation.Controller;
-import io.Micronaut.http.annotation.Get;
-import io.Micronaut.http.annotation.PathVariable;
+    import io.Micronaut.http.annotation.Controller;
+    import io.Micronaut.http.annotation.Get;
+    import io.Micronaut.http.annotation.PathVariable;
 
-@Controller("books")
-public class BookstoreController {
+    @Controller("books")
+    public class BookstoreController {
 
-    @Get("/{author}")
-    public Book retrieveBooksByAuthor() {
-        return new Book("1000 new things", "John Doe");
+        @Get("/{author}")
+        public Book retrieveBooksByAuthor() {
+            return new Book("1000 new things", "John Doe");
+        }
+
     }
-
-}
                 </code></pre>
                 <p>
                     This will look a lot like a Spring Controller, right? Except that the annotations are used from the
@@ -223,25 +212,24 @@ public class BookstoreController {
                     Remarkable here is the implementation of the <code>Book</code> DTO:
                 </p>
                 <pre><code>
-java
-@Introspected
-public class Book implements Serializable {
+    java
+    @Introspected
+    public class Book implements Serializable {
 
-    private String title;
-    private String author;
+        private String title;
+        private String author;
 
-    public Book(String title, String author) {
-        this.title  = title;
-        this.author = author;
+        public Book(String title, String author) {
+            this.title  = title;
+            this.author = author;
+        }
+
+        // some getters
     }
-
-    // some getters
-}
                 </code></pre>
                 <p>
                     The <code>@Introspected</code> annotation which is needed for reflection free DTO's. At compile
-                    time, a check
-                    will be performed to see if all the properties can be initialized for the DTO.
+                    time, a check will be performed to see if all the properties can be initialized for the DTO.
                 </p>
                 <p>
                     It is interesting to have a look at the compiled files for this object.
@@ -255,8 +243,8 @@ public class Book implements Serializable {
                     author's name. Let's start with the most simple case:
                 </p>
                 <pre><code>
-bash
-mn create-function get-books-by-author --build=Maven --features=openfaas
+    bash
+    mn create-function get-books-by-author --build=Maven --features=openfaas
                 </code></pre>
                 <p>
                     Note: to be able to see all the features available for a function use:
@@ -264,12 +252,11 @@ mn create-function get-books-by-author --build=Maven --features=openfaas
                 </p>
                 <p>
                     To make the function buildable, one AWS dependency has to be removed (in this example no AWS
-                    functionality will be used and it will return class path errors):
-                    <br />
+                    functionality will be used and it will return class path errors):<br />
                     At the time of writing this was still generated for a function running on OpenFaaS.
                 </p>
                 <pre><code>
-xml
+    xml
     &lt;dependency&gt;
         &lt;groupId&gt;com.amazonaws&lt;/groupId&gt;
         &lt;artifactId&gt;aws-lambda-java-log4j2&lt;/artifactId&gt;
@@ -292,8 +279,7 @@ xml
                 </p>
                 <p>
                     <code>-noverify</code> and <code>-XX:+UseCGroupMemoryLimitForHeap</code> are deprecated in JDK 13
-                    and are therefore not
-                    needed. The line of code will then become:
+                    and are therefore not needed. The line of code will then become:
                 </p>
                 <p>
                     <code>
@@ -307,13 +293,13 @@ xml
                     Also the following must be added for the logging in the shade jar:
                 </p>
                 <pre><code>
-xml
-&lt;transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"&gt;
-    &lt;mainClass&gt;${exec.mainClass}&lt;/mainClass&gt;
-    &lt;manifestEntries&gt;
-        &lt;Multi-Release&gt;true&lt;/Multi-Release&gt;
-    &lt;/manifestEntries&gt;
-&lt;/transformer&gt;
+    xml
+    &lt;transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"&gt;
+        &lt;mainClass&gt;${exec.mainClass}&lt;/mainClass&gt;
+        &lt;manifestEntries&gt;
+            &lt;Multi-Release&gt;true&lt;/Multi-Release&gt;
+        &lt;/manifestEntries&gt;
+    &lt;/transformer&gt;
                 </code></pre>
                 <p>
                     Now, for convenience, the logging level will only be set to ERROR, by changing the fprocess command
@@ -343,35 +329,34 @@ xml
                 <p>
                     Installing OpenFaaS is quite easy and should not take too much time. When working on my project, I
                     wanted to explore the Micronaut functions. However, deploying to AWS was not an option and my
-                    curiosity was triggered by OpenFaaS. Installing OpenFaaS locally is quite easy.
-                    <br />
+                    curiosity was triggered by OpenFaaS. Installing OpenFaaS locally is quite easy.<br />
                     OpenFaaS makes it easy to deploy functions and applications on an existing Kubernetes cluster.
                 </p>
                 <p>
-                    Instructions for the installation are listed <a
-                        href="https://docs.openfaas.com/deployment/kubernetes/" target="_blank">here</a>.
+                    Instructions for the installation are listed
+                    <a href="https://docs.openfaas.com/deployment/kubernetes/" target="_blank">here</a>.
                 </p>
                 <p>
                     In a nutshell, start with installing the CLI:
                 </p>
                 <pre><code>
-bash
-brew install faas-cli
+    bash
+    brew install faas-cli
                 </code></pre>
                 <p>
                     Then before installing OpenFaaS, install Arkade (which will be fastest option to install OpenFaaS
                     later on):
                 </p>
                 <pre><code>
-bash
-curl -SLsf https://dl.get-arkade.dev/ | sudo sh
+    bash
+    curl -SLsf https://dl.get-arkade.dev/ | sudo sh
                 </code></pre>
                 <p>
                     Now you can finally install OpenFaaS on your local Kubernetes cluster:
                 </p>
                 <pre><code>
-bash
-arkade install openfaas
+    bash
+    arkade install openfaas
                 </code></pre>
                 <p>
                     Now the trick is not to ignore all the lines of logging that will come out of the installation,
@@ -379,44 +364,44 @@ arkade install openfaas
                     checking whether all the deployments where successful:
                 </p>
                 <pre><code>
-bash
-kubectl -n openfaas get deployments -l "release=openfaas, app=openfaas"
+    bash
+    kubectl -n openfaas get deployments -l "release=openfaas, app=openfaas"
                 </code></pre>
                 <p>
                     The successful deployments should be:
                 </p>
                 <pre><code>
-NAME                READY   UP-TO-DATE   AVAILABLE   AGE
+    NAME                READY   UP-TO-DATE   AVAILABLE   AGE
 
-alertmanager        1/1     1            1           6d21h
+    alertmanager        1/1     1            1           6d21h
 
-basic-auth-plugin   1/1     1            1           6d21h
+    basic-auth-plugin   1/1     1            1           6d21h
 
-faas-idler          1/1     1            1           6d21h
+    faas-idler          1/1     1            1           6d21h
 
-gateway             1/1     1            1           6d21h
+    gateway             1/1     1            1           6d21h
 
-nats                1/1     1            1           6d21h
+    nats                1/1     1            1           6d21h
 
-prometheus          1/1     1            1           6d21h
+    prometheus          1/1     1            1           6d21h
 
-queue-worker        1/1     1            1           6d21h
+    queue-worker        1/1     1            1           6d21h
                 </code></pre>
                 <p>
                     Now one final step has to be taken. The Gateway used by OpenFaaS should be forwarded:
                 </p>
                 <pre><code>
-bash
-kubectl -n openfaas rollout status deploy/gateway
-kubectl -n openfaas port-foward svc/gateway 8080:8080
+    bash
+    kubectl -n openfaas rollout status deploy/gateway
+    kubectl -n openfaas port-foward svc/gateway 8080:8080
                 </code></pre>
                 <p>
                     Do not forget setup the login:
                 </p>
                 <pre><code>
-bash
-PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath="{.data.basic-auth-password}" | base64 --decode; echo)
-echo -n $PASSWORD | faas-cli login --username admin --password-stdin
+    bash
+    PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath="{.data.basic-auth-password}" | base64 --decode; echo)
+    echo -n $PASSWORD | faas-cli login --username admin --password-stdin
                 </code></pre>
                 <p>
                     OpenFaaS should now be all up and running!
@@ -432,58 +417,57 @@ echo -n $PASSWORD | faas-cli login --username admin --password-stdin
                     could be started within a docker container:
                 </p>
                 <pre><code>
-bash
-sudo docker run -d -p 5000:5000 --name registry registry:2
+    bash
+    sudo docker run -d -p 5000:5000 --name registry registry:2
                 </code></pre>
                 <p>
                     Looking more closely to the <code>function.yml</code>, after the provider description (which will
-                    only specify
-                    the endpoint of the gateway), the function is described as a docker image that would have to be ran:
+                    only specify the endpoint of the gateway), the function is described as a docker image that would
+                    have to be ran:
                 </p>
                 <pre><code>
-yaml
-provider:
-    name: openfaas
-    gateway: http://127.0.0.1:8080
-functions:
-    get-books-by-author:
-        lang: dockerfile
-        handler: .
-        image: localhost:5000/get-books-by-author:latest
+    yaml
+    provider:
+        name: openfaas
+        gateway: http://127.0.0.1:8080
+    functions:
+        get-books-by-author:
+            lang: dockerfile
+            handler: .
+            image: localhost:5000/get-books-by-author:latest
                 </code></pre>
                 <p>
                     The image in this example is prefixed with <code>localhost:5000/</code> which is the local registry
-                    that was
-                    launched by the previous bash command.
+                    that was launched by the previous bash command.
                 </p>
                 <p>
                     Now let's use the magical commands of the <code>faas-cli</code> to deploy and run the function:
                 </p>
                 <pre><code>
-bash
-faas-cli build -f function.yml
-faas-cli push -f function.yml
-faas-cli deploy -f function.yml
+    bash
+    faas-cli build -f function.yml
+    faas-cli push -f function.yml
+    faas-cli deploy -f function.yml
                 </code></pre>
                 <p>
                     Now call the function through the OpenFaaS Gateway:
                 </p>
                 <pre><code>
-bash
-curl -X GET http://127.0.0.1:8080/function/get-books-by-author -H 'Content-Type: application/json' -d $'{"name":"Piet"}'
+    bash
+    curl -X GET http://127.0.0.1:8080/function/get-books-by-author -H 'Content-Type: application/json' -d $'{"name":"Piet"}'
                 </code></pre>
                 <p>
                     To verify that the function is running:
                 </p>
                 <pre><code>
-bash
-kubectl -n openfaas-fn get pods
+    bash
+    kubectl -n openfaas-fn get pods
                 </code></pre>
                 <p>
                     Now this function has a running pod, but it is not running as such. The pod will be put up as a
                     placeholder for the function. Once a REST call is made to the endpoint, the application will be
-                    started. This is done with <a href="https://docs.openfaas.com/architecture/watchdog/"
-                        target="_blank">Watchdog</a>.
+                    started. This is done with
+                    <a href="https://docs.openfaas.com/architecture/watchdog/" target="_blank">Watchdog</a>.
                 </p>
                 <h2>
                     Resources
@@ -514,8 +498,7 @@ kubectl -n openfaas-fn get pods
                     </li>
                     <li>
                         <a href="https://docs.micronaut.io/latest/api/io/micronaut/inject/BeanDefinition.html"
-                            target="_blank">Java
-                            Documentation on Micronaut's BeanDefinition class</a>
+                            target="_blank">Java Documentation on Micronaut's BeanDefinition class</a>
                     </li>
                 </ul>
                 <hr />
@@ -524,9 +507,7 @@ kubectl -n openfaas-fn get pods
                         <img src="../../../images/authors/image-pva.jpg">
                     </div>
                     <div>
-                        <h1>
-                            Paulien van Alst
-                        </h1>
+                        <h1>Paulien van Alst</h1>
                         <p>
                             Paulien is a passionate software engineer in love with readable, reliable and testable
                             code, independent on the language or technology used. At OpenValue she works on helping
@@ -538,116 +519,70 @@ kubectl -n openfaas-fn get pods
                 </div>
             </section>
         </div>
+
         <!-- Footer -->
         <footer id="footer">
             <section class="split">
-                <section class="alt">
+                <section>
                     <div>
-                        <h2>
-                            <a href="https://openvalue.nl/">
-                                <img src="../../../images/nl.png" class="flag">Utrecht
-                            </a>
-                        </h2>
+                        <h2><a href="https://openvalue.nl/"><img src="../../../images/nl.png" class="flag">Utrecht</a></h2>
                         <p class="bold">
-                            Tractieweg 41, Studio N
-                            <br />
+                            Tractieweg 41, Studio N<br />
                             3534 AP Utrecht
                         </p>
-                        <p>
-                            <a href="tel:+31850606886" class="icon solid fa-phone"> +31-85-0606886</a>
-                        </p>
-                        <p>
-                            <a href="mailto:utrecht@openvalue.nl" class="icon regular fa-envelope">
-                                utrecht@openvalue.nl
-                            </a>
-                        </p>
+                        <p><a href="tel:+31850606886" class="icon solid fa-phone"> +31-850606886</a></p>
+                        <p><a href="mailto:utrecht@openvalue.nl" class="icon regular fa-envelope"> utrecht@openvalue.nl</a></p>
                     </div>
                 </section>
                 <section>
                     <div>
-                        <h2>
-                            <a href="https://openvalue.nl/">
-                                <img src="../../../images/nl.png" class="flag">Rotterdam
-                            </a>
-                        </h2>
+                        <h2><a href="https://openvalue.nl/"><img src="../../../images/nl.png" class="flag">Rotterdam</a></h2>
                         <p class="bold">
-                            Jacob van Heemskercklaan 119
-                            <br />
+                            Jacob van Heemskercklaan 119<br />
                             3144 DK Maassluis
                         </p>
-                        <p>
-                            <a href="tel:+31643896389" class="icon solid fa-phone"> +31-6-4389-6389</a>
-                        </p>
-                        <p>
-                            <a href="mailto:rotterdam@openvalue.nl" class="icon regular fa-envelope">
-                                rotterdam@openvalue.nl
-                            </a>
-                        </p>
+                        <p><a href="tel:+31643896389" class="icon solid fa-phone"> +31-643896389</a></p>
+                        <p><a href="mailto:rotterdam@openvalue.nl" class="icon regular fa-envelope"> rotterdam@openvalue.nl</a></p>
                     </div>
                 </section>
             </section>
             <section class="split">
-                <section class="alt">
+                <section>
                     <div>
-                        <h2>
-                            <a href="https://openvalue.de/">
-                                <img src="../../../images/de.png" class="flag">Munich
-                            </a>
-                        </h2>
+                        <h2><a href="https://openvalue.de/"><img src="../../../images/de.png" class="flag">Munich</a></h2>
                         <p class="bold">
-                            Jakob-Klar-Straße 4
-                            <br />
+                            Jakob-Klar-Straße 4<br />
                             80796 Munich
                         </p>
-                        <p>
-                            <a href="tel:+498945214739" class="icon solid fa-phone"> +49 89 4521 4739</a>
-                        </p>
-                        <p>
-                            <a href="mailto:info@openvalue.de" class="icon regular fa-envelope">
-                                info@openvalue.de
-                            </a>
-                        </p>
+                        <p><a href="tel:+498945214739" class="icon solid fa-phone"> +49-8945214739</a></p>
+                        <p><a href="mailto:info@openvalue.de" class="icon regular fa-envelope"> info@openvalue.de</a></p>
                     </div>
                 </section>
-                <section class="alt">
+                <section>
                     <div>
-                        <h2>
-                            <a href="https://openvalue.at/">
-                                <img src="../../../images/at.png" class="flag">Vienna
-                            </a>
-                        </h2>
+                        <h2><a href="https://openvalue.at/"><img src="../../../images/at.png" class="flag">Vienna</a></h2>
                         <p class="bold">
-                            Millennium Tower
-                            <br />
-                            Regus 23rd and 24th floor
-                            <br />
-                            Handelskai 94 – 96
-                            <br />
+                            Millennium Tower<br />
+                            Regus 23rd and 24th floor<br />
+                            Handelskai 94 – 96<br />
                             1200 Vienna, Austria
                         </p>
-                        <p>
-                            <a href="tel:+436642035478" class="icon solid fa-phone"> +43 (0)664 203 54 78</a>
-                        </p>
-                        <p>
-                            <a href="mailto:info@openvalue.at" class="icon regular fa-envelope">info@openvalue.at</a>
-                        </p>
+                        <p><a href="tel:+436642035478" class="icon solid fa-phone"> +43-6642035478</a></p>
+                        <p><a href="mailto:info@openvalue.at" class="icon regular fa-envelope"> info@openvalue.at</a></p>
                     </div>
                 </section>
             </section>
         </footer>
+
         <!-- Copyright -->
         <div id="copyright">
             <ul>
                 <li>&copy; <a href="https://www.openvalue.group/" target="_blank">OpenValue</a></li>
-                <!--<li>
-                    <a href="../../../privacy.html" target="_blank">Privacy</a>
-                </li>
-                <li>
-                    <a href="../../../imprint.html" target="_blank">Imprint</a>
-                </li>-->
             </ul>
         </div>
+
     </div>
+
     <!-- Scripts -->
     <script src="../../../assets/js/jquery.min.js"></script>
     <script src="../../../assets/js/jquery.scrollex.min.js"></script>
@@ -656,6 +591,9 @@ kubectl -n openfaas-fn get pods
     <script src="../../../assets/js/breakpoints.min.js"></script>
     <script src="../../../assets/js/util.js"></script>
     <script src="../../../assets/js/main.js"></script>
+    <script src="../../../assets/js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
 </body>
 
 </html>
